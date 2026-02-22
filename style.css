@@ -8,7 +8,8 @@
     --text-silver: #cbd5e1;
     --text-light: #f1f5f9;
     --text-muted: #94a3b8;
-    --accent-cyan: #00e5ff;
+    --cyan-glacial: #4a90e2;  /* Cyan Glacial - Laboratório Criminal */
+    --cyan-dark: #2a5a9c;
     --warn-red: #ef4444;
     --warn-orange: #f59e0b;
     --font-main: 'Inter', sans-serif;
@@ -33,47 +34,74 @@ body {
     position: relative;
 }
 
-/* Laser Effect (VDC Style) */
+/* Laser Effect (Cyan Glacial - Estilo Laboratório Criminal) */
 .laser-h {
     position: fixed;
     width: 100%;
     height: 1px;
-    background: var(--accent-cyan);
-    box-shadow: 0 0 10px var(--accent-cyan), 0 0 20px var(--accent-cyan);
+    background: var(--cyan-glacial);
+    box-shadow: 0 0 10px var(--cyan-glacial), 0 0 20px var(--cyan-glacial);
     top: 0;
     left: 0;
     animation: scanH 8s infinite linear;
     z-index: 9999;
     pointer-events: none;
-    opacity: 0.3;
+    opacity: 0.2;
 }
 
 .laser-v {
     position: fixed;
     width: 1px;
     height: 100%;
-    background: var(--accent-cyan);
-    box-shadow: 0 0 10px var(--accent-cyan), 0 0 20px var(--accent-cyan);
+    background: var(--cyan-glacial);
+    box-shadow: 0 0 10px var(--cyan-glacial), 0 0 20px var(--cyan-glacial);
     top: 0;
     left: 0;
     animation: scanV 8s infinite linear;
     z-index: 9999;
     pointer-events: none;
-    opacity: 0.3;
+    opacity: 0.2;
 }
 
 @keyframes scanH {
     0% { top: 0; opacity: 0; }
-    5% { opacity: 0.3; }
-    95% { opacity: 0.3; }
+    5% { opacity: 0.2; }
+    95% { opacity: 0.2; }
     100% { top: 100%; opacity: 0; }
 }
 
 @keyframes scanV {
     0% { left: 0; opacity: 0; }
-    5% { opacity: 0.3; }
-    95% { opacity: 0.3; }
+    5% { opacity: 0.2; }
+    95% { opacity: 0.2; }
     100% { left: 100%; opacity: 0; }
+}
+
+/* Tooltips para Glossário Técnico */
+.term {
+    position: relative;
+    cursor: help;
+    border-bottom: 1px dotted var(--cyan-glacial);
+    color: var(--cyan-glacial);
+}
+
+.term:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 150%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #000;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 2px;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    z-index: 1000;
+    border: 1px solid var(--cyan-glacial);
+    box-shadow: 0 0 10px var(--cyan-glacial);
+    font-family: var(--font-mono);
+    pointer-events: none;
 }
 
 /* Nav */
@@ -153,13 +181,14 @@ body {
 
 /* Hero Section */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     text-align: center;
     overflow: hidden;
+    padding: 100px 0;
 }
 
 #trackingCanvas {
@@ -172,10 +201,65 @@ body {
     z-index: 1;
 }
 
+/* Terminal Forense Lateral */
+.forensic-terminal {
+    position: absolute;
+    top: 120px;
+    right: 5%;
+    width: 300px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid var(--cyan-glacial);
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    z-index: 20;
+    box-shadow: 0 0 20px rgba(74, 144, 226, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+.terminal-header {
+    background: #111;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--cyan-glacial);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.terminal-title {
+    color: var(--cyan-glacial);
+    font-weight: 600;
+}
+
+.terminal-status {
+    color: #10b981;
+    font-size: 0.6rem;
+}
+
+.terminal-body {
+    padding: 0.75rem;
+    min-height: 120px;
+}
+
+.terminal-line {
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+    animation: fadeIn 0.5s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
 .hero-content {
     z-index: 10;
     max-width: 900px;
     padding: 0 20px;
+    position: relative;
 }
 
 .forensic-badge {
@@ -210,6 +294,51 @@ body {
     max-width: 700px;
     margin: 0 auto 3rem;
     color: var(--text-muted);
+}
+
+/* Dropzone Simulado */
+.evidence-dropzone {
+    border: 2px dashed var(--cyan-glacial);
+    background: rgba(74, 144, 226, 0.05);
+    padding: 2rem;
+    border-radius: 4px;
+    margin: 2rem auto;
+    max-width: 500px;
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+}
+
+.evidence-dropzone:hover {
+    border-color: var(--gold);
+    background: rgba(197, 160, 89, 0.05);
+    transform: scale(1.02);
+}
+
+.evidence-dropzone i {
+    font-size: 2rem;
+    color: var(--cyan-glacial);
+    margin-bottom: 1rem;
+}
+
+.evidence-dropzone span {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.hash-simulation {
+    margin-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--cyan-glacial);
+    word-break: break-all;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.evidence-dropzone.dropped .hash-simulation {
+    opacity: 1;
 }
 
 .hero-stats {
@@ -515,7 +644,7 @@ h2 {
 
 .vdc-feature:hover {
     transform: translateX(10px);
-    border-left-color: var(--accent-cyan);
+    border-left-color: var(--cyan-glacial);
 }
 
 .vdc-feature i {
@@ -557,27 +686,55 @@ h2 {
 }
 
 .hash-value {
-    color: var(--accent-cyan);
+    color: var(--cyan-glacial);
     word-break: break-all;
     background: rgba(0, 0, 0, 0.3);
     padding: 0.5rem 1rem;
     border-radius: 2px;
     border: 1px solid var(--border-color);
+    transition: 0.3s;
+}
+
+/* Efeito Glitch no Hover (Segurança) */
+.glitch-hover:hover {
+    animation: glitch 0.3s infinite;
+    position: relative;
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+.glitch-hover:hover::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--warn-red);
+    opacity: 0.5;
+    transform: translate(-2px, -2px);
+    pointer-events: none;
 }
 
 .qr-demo {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     background: #fff;
     position: relative;
     overflow: hidden;
+    padding: 4px;
 }
 
 .qr-demo::before {
     content: '';
     position: absolute;
-    top: 5px;
-    left: 5px;
+    top: 8px;
+    left: 8px;
     width: 10px;
     height: 10px;
     background: #000;
@@ -790,7 +947,7 @@ h2 {
     background: rgba(0, 0, 0, 0.5);
     padding: 1rem;
     border-radius: 2px;
-    color: var(--accent-cyan);
+    color: var(--cyan-glacial);
     flex: 1;
 }
 
@@ -872,6 +1029,10 @@ h2 {
 
 /* Responsive */
 @media (max-width: 1024px) {
+    .forensic-terminal {
+        display: none;
+    }
+    
     .hero-content h1 {
         font-size: 3rem;
     }
