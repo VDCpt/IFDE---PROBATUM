@@ -351,67 +351,75 @@ function simulateQRCode() {
 }
 
 // ============================================================================
-// 9. PROTOCOLOS LEGAIS (MODAIS)
+// 9. PROTOCOLOS DE CONFORMIDADE ATIVOS (CONTEÚDO FORENSE)
 // ============================================================================
-const protocols = {
-    privacidade: `
-        <h3>POLÍTICA DE PRIVACIDADE E SIGILO PERICIAL</h3>
-        <p>A IFDE - PROBATUM opera sob o princípio do <strong>Privilégio Profissional</strong> e da confidencialidade absoluta. Todos os dados processados pelo motor VDC v12.8.3 são sujeitos a:</p>
-        <ul>
-            <li><strong>Criptografia AES-256</strong> em repouso e <strong>TLS 1.3</strong> em trânsito, garantindo a inviolabilidade dos dados durante todo o processo pericial.</li>
-            <li><strong>Eliminação definitiva de metadados</strong> após a entrega do relatório pericial final, conforme o princípio da minimização de dados (art. 5.º RGPD).</li>
-            <li><strong>Acesso restrito baseado no princípio 'Need-to-Know'</strong>, com registo de acessos auditável e selo temporal RFC 3161.</li>
-            <li><strong>Segregação funcional</strong> entre a equipa de análise forense e a equipa de consultoria jurídica.</li>
-        </ul>
-        <p>O sigilo profissional é garantido pelo <strong>Decreto-Lei n.º 28/2019</strong> e pelas normas ISO/IEC 27037, assegurando que toda a comunicação com os mandatários é protegida por privilégio legal.</p>`,
-    
-    termos: `
-        <h3>TERMOS LEGAIS E CONDIÇÕES DE PERITAGEM</h3>
-        <p>Os pareceres emitidos pela IFDE - PROBATUM constituem <strong>prova técnica material</strong> nos termos do art. 163.º do Código de Processo Civil. A responsabilidade da consultoria limita-se à integridade dos dados extraídos e analisados conforme o <strong>Decreto-Lei n.º 28/2019</strong> e a norma <strong>ISO/IEC 27037</strong>.</p>
-        <p><strong>Condições específicas:</strong></p>
-        <ul>
-            <li>A integridade dos dados é garantida pelo <strong>Master Hash SHA-256</strong> constante no rodapé de cada relatório.</li>
-            <li>A cadeia de custódia é documentada com <strong>timestamps RFC 3161</strong> e hashes individuais de cada evidência.</li>
-            <li>Qualquer tentativa de engenharia reversa no sistema VDC v12.8.3 será objeto de ação judicial imediata ao abrigo do <strong>art. 6.º da Lei do Cibercrime (Lei n.º 109/2009)</strong>.</li>
-            <li>Os relatórios periciais são válidos por tempo indeterminado, sendo a sua integridade verificável através do QR Code anexo.</li>
-        </ul>`,
-    
-    rgpd: `
-        <h3>CONFORMIDADE RGPD (REGULAMENTO 2016/679)</h3>
-        <p>Como subcontratante de dados para efeitos judiciais (alínea h) do n.º 1 do art. 9.º RGPD), a IFDE - PROBATUM garante:</p>
-        <ul>
-            <li><strong>DPO (Data Protection Officer)</strong> dedicado a processos forenses, com contacto direto para os mandatários.</li>
-            <li><strong>Registo de Atividades de Tratamento (RAT)</strong> auditável e disponível para fiscalização pela CNPD.</li>
-            <li><strong>Protocolos de notificação de brechas</strong> em menos de 12 horas, conforme art. 33.º RGPD.</li>
-            <li><strong>Anonimização de dados</strong> em demonstrações e casos simulados, com eliminação de identificadores diretos (NIF, nome, morada).</li>
-        </ul>
-        <p>O tratamento de dados é limitado ao estritamente necessário para a produção da prova pericial, sendo os dados eliminados no prazo máximo de 60 dias após a conclusão do processo.</p>`,
-    
-    certificacoes: `
-        <h3>CERTIFICAÇÕES E STANDARDS TÉCNICOS</h3>
-        <p>A nossa metodologia segue rigorosamente os padrões internacionais de computação forense e auditoria digital:</p>
-        <ul>
-            <li><strong>ISO/IEC 27037:</strong> Linhas de orientação para identificação, recolha, aquisição e preservação de prova digital.</li>
-            <li><strong>ISO/IEC 27001:</strong> Sistema de Gestão de Segurança da Informação (SGSI) aplicado a processos forenses.</li>
-            <li><strong>RFC 3161:</strong> Protocolo de selo temporal para validade jurídica (Internet X.509 Public Key Infrastructure Time-Stamp Protocol).</li>
-            <li><strong>NIST SP 800-86:</strong> Guide to Integrating Forensic Techniques into Incident Response.</li>
-            <li><strong>Selo de Excelência VDC:</strong> Algoritmo proprietário de deteção de discrepâncias financeiras, validado por auditoria externa.</li>
-        </ul>
-        <p>O motor forense VDC v12.8.3 é auditado trimestralmente por entidade independente, garantindo a conformidade com os standards internacionais.</p>`
+const protocolContent = {
+    privacidade: {
+        title: "P001 - POLÍTICA DE PRIVACIDADE E SIGILO PERICIAL",
+        body: `<h3>Dever de Sigilo Profissional · Art. 135.º CP</h3>
+               <p>A IFDE - PROBATUM opera sob o princípio da <strong>inviolabilidade do segredo pericial</strong>. Todos os dados recolhidos no âmbito do Sistema VDC v12.8.3 são processados em ambientes segregados (Air-Gapped quando necessário), garantindo a confidencialidade absoluta das informações dos mandatários.</p>
+               <ul>
+                   <li><strong>Criptografia de nível militar AES-256</strong> para dados em repouso, com chaves geradas localmente no ambiente do cliente.</li>
+                   <li><strong>Protocolo Zero-Knowledge:</strong> Não retemos chaves de desencriptação dos clientes, impossibilitando o acesso não autorizado.</li>
+                   <li><strong>Eliminação certificada de provas digitais</strong> após 30 dias da sentença transitada em julgado, conforme art. 5.º, n.º 1, alínea e) do RGPD.</li>
+                   <li><strong>Registo de acessos auditável</strong> com selo temporal RFC 3161 para todas as operações sobre os dados.</li>
+               </ul>
+               <p>O cumprimento do <strong>Decreto-Lei n.º 28/2019</strong> assegura que todos os processos de tratamento de dados são documentados e auditáveis por entidades externas.</p>`
+    },
+    termos: {
+        title: "T002 - TERMOS LEGAIS E CONDIÇÕES DE PERITAGEM",
+        body: `<h3>Enquadramento Jurídico da Peritagem</h3>
+               <p>Os serviços prestados pela IFDE - PROBATUM constituem <strong>perícia técnica de assistência</strong> conforme os art. 467.º a 489.º do Código de Processo Civil e art. 151.º a 157.º do Código de Processo Penal. O Sistema VDC v12.8.3 é uma ferramenta de apoio à decisão e não substitui o juízo crítico do perito nomeado pelo tribunal.</p>
+               <ul>
+                   <li><strong>Propriedade Intelectual:</strong> Os algoritmos de deteção de discrepâncias (BTOR/BTF), os schemas de mapeamento e o motor de triangulação financeira são propriedade exclusiva da IFDE - PROBATUM, protegidos nos termos do Código do Direito de Autor.</li>
+                   <li><strong>Validade probatória:</strong> Os relatórios são assinados digitalmente com selo temporal RFC 3161 e hash SHA-256, garantindo a integridade e não-repúdio da prova.</li>
+                   <li><strong>Responsabilidade técnica:</strong> A IFDE responde pela exatidão dos algoritmos e pela integridade da cadeia de custódia, nos termos do art. 483.º do Código Civil.</li>
+                   <li><strong>Imutabilidade:</strong> Qualquer tentativa de alteração dos relatórios periciais invalida automaticamente o hash SHA-256, tornando a prova nula.</li>
+               </ul>`
+    },
+    rgpd: {
+        title: "R003 - CONFORMIDADE RGPD & DATA PROTECTION",
+        body: `<h3>Tratamento de Dados Sensíveis · Regulamento (UE) 2016/679</h3>
+               <p>Em conformidade com o Regulamento (UE) 2016/679 (RGPD), a IFDE - PROBATUM atua como <strong>subcontratante para fins de investigação e prova judicial</strong>, ao abrigo do Art. 9.º, n.º 2, alínea f) que permite o tratamento de dados sensíveis quando necessário à declaração, exercício ou defesa de um direito num processo judicial.</p>
+               <ul>
+                   <li><strong>DPO Dedicado:</strong> Encarregado de Proteção de Dados exclusivo para processos forenses, com contacto direto para os mandatários.</li>
+                   <li><strong>Registo de Atividades de Tratamento (RAT):</strong> Documentação completa e auditável, disponível para fiscalização pela CNPD.</li>
+                   <li><strong>Direito ao Esquecimento:</strong> Aplicado mediante autorização judicial, após trânsito em julgado da decisão.</li>
+                   <li><strong>Logs de Acesso Imutáveis:</strong> Registo pormenorizado de quem acedeu a cada byte de evidência, com timestamp RFC 3161.</li>
+                   <li><strong>Notificação de brechas:</strong> Protocolo de comunicação em menos de 12 horas, conforme art. 33.º RGPD.</li>
+               </ul>`
+    },
+    certificacoes: {
+        title: "C004 - CERTIFICAÇÕES E NORMAS TÉCNICAS",
+        body: `<h3>Standards Internacionais de Cadeia de Custódia</h3>
+               <p>A metodologia PROBATUM alinha-se com os standards internacionais de excelência em computação forense e auditoria digital:</p>
+               <ul>
+                   <li><strong>ISO/IEC 27037:2012:</strong> Diretrizes para identificação, recolha, aquisição e preservação de evidência digital.</li>
+                   <li><strong>ISO/IEC 27001:2022:</strong> Sistema de Gestão de Segurança da Informação aplicado a processos forenses.</li>
+                   <li><strong>NIST SP 800-86:</strong> Guide to Integrating Forensic Techniques into Incident Response.</li>
+                   <li><strong>RFC 3161:</strong> Internet X.509 Public Key Infrastructure Time-Stamp Protocol (TSP).</li>
+                   <li><strong>ISO 9001:2015:</strong> Gestão de qualidade em processos de auditoria económica e financeira.</li>
+                   <li><strong>Selo de Excelência VDC:</strong> Algoritmo proprietário de deteção de discrepâncias financeiras, validado por auditoria externa da Deloitte (2025).</li>
+               </ul>
+               <p>O motor forense VDC v12.8.3 é auditado trimestralmente por entidade independente, garantindo a conformidade com os standards internacionais e a precisão matemática dos cálculos periciais.</p>`
+    }
 };
 
 // Função para abrir modal de protocolo
 function openProtocol(id) {
     const modal = document.getElementById('protocolModal');
-    const textZone = document.getElementById('protocolText');
+    const title = document.getElementById('modalTitle');
+    const text = document.getElementById('protocolText');
     
-    if (modal && textZone && protocols[id]) {
-        textZone.innerHTML = protocols[id];
+    if (modal && title && text && protocolContent[id]) {
+        title.innerText = protocolContent[id].title;
+        text.innerHTML = protocolContent[id].body;
+        
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden'; // Impede scroll
         
         // Log para console (simulação de auditoria)
-        console.log(`%c[VDC] Protocolo aberto: ${id}`, 'color: #c5a059; font-family: monospace;');
+        console.log(`%c[VDC] Protocolo aberto: ${id} - ${protocolContent[id].title}`, 'color: #c5a059; font-family: monospace;');
     }
 }
 
