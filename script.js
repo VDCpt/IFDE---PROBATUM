@@ -1,31 +1,60 @@
 'use strict';
 
-const IFDE_PROBATUM = {
-    init() {
-        this.startAnalysis();
-        console.log("IFDE - PROBATUM: Sistema de Peritagem Forense Ativado.");
-    },
+// 1. Animação de Data Tracking (Hero Canvas)
+const canvas = document.getElementById('trackingCanvas');
+const ctx = canvas.getContext('2d');
 
-    startAnalysis() {
-        const terminal = document.getElementById('output-stream');
-        const sequences = [
-            "> Acedendo a ficheiros SAFT-T...",
-            "> Mapeando discrepâncias de IVA...",
-            "> Rastreando endereço Blockchain...",
-            "> Prova consolidada com Master Hash."
-            "> Ja foste Hoje Pro Cara...."
-        ];
-        
-        let i = 0;
-        const interval = setInterval(() => {
-            if(i < sequences.length) {
-                terminal.innerHTML += `<br>${sequences[i]}`;
-                i++;
-            } else {
-                clearInterval(interval);
-            }
-        }, 1500);
+let particles = [];
+
+function initCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+class Particle {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2;
+        this.speedX = (Math.random() - 0.5) * 1;
+        this.speedY = (Math.random() - 0.5) * 1;
     }
-};
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x > canvas.width) this.x = 0;
+        if (this.x < 0) this.x = canvas.width;
+        if (this.y > canvas.height) this.y = 0;
+        if (this.y < 0) this.y = canvas.height;
+    }
+    draw() {
+        ctx.fillStyle = '#c5a059';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
 
-document.addEventListener('DOMContentLoaded', () => IFDE_PROBATUM.init());
+function createParticles() {
+    for (let i = 0; i < 100; i++) {
+        particles.push(new Particle());
+    }
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+        p.update();
+        p.draw();
+    });
+    requestAnimationFrame(animate);
+}
+
+// Inicialização
+window.addEventListener('resize', initCanvas);
+initCanvas();
+createParticles();
+animate();
+
+// 2. Efeito de Revelação de Texto
+console.log("IFDE - PROBATUM: Website Institucional Ativo.");
