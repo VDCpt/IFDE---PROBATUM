@@ -518,7 +518,7 @@ function openForensicReport() {
             <p>Recomenda-se a participação à Autoridade Tributária e a instauração de procedimento de inspeção externa.</p>
             
             <div class="report-footer-signature">
-                <strong>Dr. Eduardo Perito</strong>
+                <strong>Dr. EM Perito</strong>
                 <small>Analista Forense de Auditoria Fiscal · Perito N.º 1827/OCP</small><br>
                 <small style="font-family: monospace;">Assinado Digitalmente (SHA-256: a1b2c3...f6e7) · RFC 3161: ${currentDate} 14:23:17 UTC</small>
             </div>
