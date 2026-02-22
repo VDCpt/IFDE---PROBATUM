@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <!-- Efeito Laser (herdado do VDC) -->
+    <!-- Efeito Laser (Cyan Glacial - Laboratório Criminal) -->
     <div class="laser-h"></div>
     <div class="laser-v"></div>
 
@@ -26,6 +26,20 @@
 
     <header class="hero">
         <canvas id="trackingCanvas"></canvas>
+        
+        <!-- Terminal Lateral Dinâmico (Logs Forenses) -->
+        <div class="forensic-terminal">
+            <div class="terminal-header">
+                <span class="terminal-title">VDC_FORENSIC_ENGINE</span>
+                <span class="terminal-status">ACTIVE</span>
+            </div>
+            <div class="terminal-body" id="terminalBody">
+                <div class="terminal-line">[INIT] v12.8.3 · SHA-256 · RFC 3161</div>
+                <div class="terminal-line">[LOAD] Módulo de triangulação financeira</div>
+                <div class="terminal-line" id="terminalDynamic"></div>
+            </div>
+        </div>
+
         <div class="hero-content">
             <div class="forensic-badge">
                 <i class="fas fa-fingerprint"></i>
@@ -33,6 +47,14 @@
             </div>
             <h1 class="reveal-text">A Verdade Material Através do Dado.</h1>
             <p class="hero-subtitle">Especialização em Peritagem Forense e Inteligência Económico-Financeira para o Setor Jurídico de Elite.</p>
+            
+            <!-- Dropzone Simulado (Demonstração de Cadeia de Custódia) -->
+            <div class="evidence-dropzone" id="evidenceDropzone">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <span>Arraste um ficheiro para simular cadeia de custódia</span>
+                <div class="hash-simulation" id="hashSimulation"></div>
+            </div>
+
             <div class="hero-stats">
                 <div class="stat-item">
                     <span class="stat-value">+4.200</span>
@@ -70,7 +92,7 @@
                         </div>
                         <div class="feature-item">
                             <i class="fas fa-check-circle gold"></i>
-                            <span>Dupla discrepância: Comissões vs Faturas / SAF-T vs DAC7</span>
+                            <span><span class="term" data-tooltip="Bank Transactions Over Reality - Base operacional real vs faturada">BTOR</span> vs <span class="term" data-tooltip="Base Tributável Faturada - Valor declarado em fatura">BTF</span>: Dupla discrepância</span>
                         </div>
                         <div class="feature-item">
                             <i class="fas fa-check-circle gold"></i>
@@ -93,7 +115,7 @@
 [INFO] Ganhos App: 404.925,00 €
 [INFO] Comissões Extrato: 93.812,00 €
 [INFO] Faturas: 36.154,00 €
-[WARN] Discrepância Crítica: 57.658,00 € (61.46%)
+[WARN] Discrepância Crítica (BTOR vs BTF): 57.658,00 € (61.46%)
 [WARN] IVA em falta (23%): 13.261,34 €
 [WARN] IVA em falta (6%): 3.459,48 €
 [SUCCESS] Smoking Gun DETETADA</pre>
@@ -124,7 +146,7 @@
 └─ Wallet Cluster: 3 endereços relacionados</pre>
                 </div>
                 <div class="text-block">
-                    <p>Rastreio de ativos em ambientes descentralizados. Inteligência aplicada à recuperação de ativos e desarticulação de esquemas de branqueamento de capitais em <strong>Blockchain</strong> com validação SHA-256 e cadeia de custódia forense.</p>
+                    <p>Rastreio de ativos em ambientes descentralizados. Inteligência aplicada à recuperação de ativos e desarticulação de esquemas de branqueamento de capitais em <strong>Blockchain</strong> com validação <span class="term" data-tooltip="Secure Hash Algorithm 256-bit - Padrão criptográfico para integridade de dados">SHA-256</span> e cadeia de custódia forense.</p>
                     <div class="feature-list">
                         <div class="feature-item">
                             <i class="fas fa-check-circle gold"></i>
@@ -165,7 +187,7 @@
                     </div>
                     <div class="quantum-value">57.658,00 €</div>
                     <div class="quantum-detail">
-                        <span>Discrepância Comissões vs Faturas</span>
+                        <span>Discrepância <span class="term" data-tooltip="Base Tributável Operacional Real (extratos)">BTOR</span> vs <span class="term" data-tooltip="Base Tributável Faturada (faturas)">BTF</span></span>
                         <span class="percent-badge">61,46%</span>
                     </div>
                     <div class="quantum-breakdown">
@@ -192,7 +214,7 @@
                     <div class="vdc-feature">
                         <i class="fas fa-shield-alt"></i>
                         <div>
-                            <h4>Cadeia de Custódia SHA-256</h4>
+                            <h4>Cadeia de Custódia <span class="term" data-tooltip="SHA-256 - Função hash criptográfica de 256 bits">SHA-256</span></h4>
                             <p>Hashes completos de todas as evidências processadas</p>
                         </div>
                     </div>
@@ -216,7 +238,7 @@
             <div class="hash-chain">
                 <div class="hash-item">
                     <span class="hash-label">Master Hash:</span>
-                    <span class="hash-value">d10c29fc8cd9a1f73483718b3b86545caed23e373d8a69482e60610cab2501d7</span>
+                    <span class="hash-value glitch-hover" id="masterHash">d10c29fc8cd9a1f73483718b3b86545caed23e373d8a69482e60610cab2501d7</span>
                 </div>
                 <div class="hash-item">
                     <span class="hash-label">QR Code:</span>
@@ -285,8 +307,8 @@
             <div class="master-hash-box">
                 <p class="mono-label"><i class="fas fa-lock"></i> VALIDAÇÃO DE INTEGRIDADE DO SISTEMA · MASTER HASH SHA-256</p>
                 <div class="hash-container">
-                    <p id="master-hash" class="mono-code">d10c29fc8cd9a1f73483718b3b86545caed23e373d8a69482e60610cab2501d7</p>
-                    <button id="copyHashBtn" class="copy-btn" title="Copiar Hash">
+                    <p id="master-hash" class="mono-code glitch-hover">d10c29fc8cd9a1f73483718b3b86545caed23e373d8a69482e60610cab2501d7</p>
+                    <button id="copyHashBtn" class="copy-btn" title="Copiar Hash SHA-256">
                         <i class="fas fa-copy"></i>
                     </button>
                 </div>
@@ -295,7 +317,7 @@
 
             <div class="footer-legal">
                 <p>© 2026 IFDE - PROBATUM | EM · Consultoria de Gestão e Auditoria Forense. Todos os direitos reservados.</p>
-                <p class="vdc-credit">Powered by <strong>VDC System v12.8.3</strong> · Court Ready · Gold · Smoking Gun</p>
+                <p class="vdc-credit">Powered by <strong>VDC System v12.8.3</strong> · Court Ready · Gold · Smoking Gun · SHA-256</p>
             </div>
         </div>
     </footer>
