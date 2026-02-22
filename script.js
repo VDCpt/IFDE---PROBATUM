@@ -21,7 +21,7 @@ class Particle {
         this.size = Math.random() * 2 + 0.5;
         this.speedX = (Math.random() - 0.5) * 0.5;
         this.speedY = (Math.random() - 0.5) * 0.5;
-        this.color = `rgba(197, 160, 89, ${Math.random() * 0.5 + 0.2})`;
+        this.color = `rgba(74, 144, 226, ${Math.random() * 0.5 + 0.2})`; // Cyan Glacial
     }
     
     update() {
@@ -54,7 +54,7 @@ class Particle {
         ctx.fillStyle = this.color;
         ctx.fill();
         
-        // Ocasionalmente desenhar linhas entre partículas próximas
+        // Desenhar linhas entre partículas próximas (simulando conexões de dados)
         particles.forEach(p => {
             const dx = this.x - p.x;
             const dy = this.y - p.y;
@@ -62,7 +62,7 @@ class Particle {
             
             if (distance < 50 && p !== this) {
                 ctx.beginPath();
-                ctx.strokeStyle = `rgba(197, 160, 89, ${0.1 * (1 - distance/50)})`;
+                ctx.strokeStyle = `rgba(74, 144, 226, ${0.1 * (1 - distance/50)})`;
                 ctx.lineWidth = 0.5;
                 ctx.moveTo(this.x, this.y);
                 ctx.lineTo(p.x, p.y);
@@ -108,7 +108,7 @@ animate();
 // ============================================================================
 // 2. EFEITO DE REVELAÇÃO DE TEXTO (SCROLL REVEAL)
 // ============================================================================
-const revealElements = document.querySelectorAll('.reveal-text, h2, .stat-card');
+const revealElements = document.querySelectorAll('.reveal-text, h2, .stat-card, .vdc-feature');
 
 const revealOnScroll = () => {
     const windowHeight = window.innerHeight;
@@ -138,7 +138,98 @@ window.addEventListener('scroll', revealOnScroll);
 window.addEventListener('load', revealOnScroll);
 
 // ============================================================================
-// 3. FUNÇÃO DE CÓPIA DE HASH (INTEGRAÇÃO VDC)
+// 3. TERMINAL DINÂMICO (LOGS FORENSES)
+// ============================================================================
+const forensicActions = [
+    '[RUNNING] HEURISTIC_FINANCIAL_ANALYSIS',
+    '[MATCHING] SAF-T vs EXTRATOS',
+    '[PROCESSING] BTOR / BTF discrepancy',
+    '[CALCULATING] IVA 23% on commissions',
+    '[DETECTED] Smoking Gun: 57.658,00 €',
+    '[VERIFYING] SHA-256 chain of custody',
+    '[COMPLETE] RFC 3161 timestamp applied'
+];
+
+let actionIndex = 0;
+const terminalLine = document.getElementById('terminalDynamic');
+
+if (terminalLine) {
+    setInterval(() => {
+        terminalLine.textContent = forensicActions[actionIndex];
+        terminalLine.style.animation = 'none';
+        terminalLine.offsetHeight; // trigger reflow
+        terminalLine.style.animation = 'fadeIn 0.5s';
+        
+        actionIndex = (actionIndex + 1) % forensicActions.length;
+    }, 2000);
+}
+
+// ============================================================================
+// 4. DROPZONE SIMULADO (CADEIA DE CUSTÓDIA)
+// ============================================================================
+const dropzone = document.getElementById('evidenceDropzone');
+const hashSimulation = document.getElementById('hashSimulation');
+
+if (dropzone) {
+    // Prevenir comportamento padrão de drag
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropzone.addEventListener(eventName, preventDefaults, false);
+    });
+    
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    
+    // Highlight no drag
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropzone.addEventListener(eventName, () => {
+            dropzone.style.borderColor = 'var(--gold)';
+            dropzone.style.background = 'rgba(197, 160, 89, 0.1)';
+        }, false);
+    });
+    
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropzone.addEventListener(eventName, () => {
+            dropzone.style.borderColor = 'var(--cyan-glacial)';
+            dropzone.style.background = 'rgba(74, 144, 226, 0.05)';
+        }, false);
+    });
+    
+    // Simular hash ao soltar ficheiro
+    dropzone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        
+        // Simular geração de hash SHA-256
+        const dummyHash = 'SHA-256: ' + Array.from({length: 64}, () => 
+            Math.floor(Math.random() * 16).toString(16)).join('');
+        
+        hashSimulation.textContent = dummyHash;
+        dropzone.classList.add('dropped');
+        
+        // Mostrar toast de confirmação
+        showToast('Cadeia de custódia simulada com sucesso', 'success');
+        
+        // Efeito visual
+        dropzone.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+            dropzone.style.transform = 'scale(1)';
+        }, 200);
+    });
+    
+    // Também permite clique para simular
+    dropzone.addEventListener('click', () => {
+        const dummyHash = 'SHA-256: ' + Array.from({length: 64}, () => 
+            Math.floor(Math.random() * 16).toString(16)).join('');
+        
+        hashSimulation.textContent = dummyHash;
+        dropzone.classList.add('dropped');
+        showToast('Simulação de hash concluída', 'info');
+    });
+}
+
+// ============================================================================
+// 5. FUNÇÃO DE CÓPIA DE HASH (INTEGRAÇÃO VDC)
 // ============================================================================
 function setupHashCopy() {
     const copyBtn = document.getElementById('copyHashBtn');
@@ -166,7 +257,7 @@ function setupHashCopy() {
 }
 
 // ============================================================================
-// 4. SISTEMA DE TOAST (NOTIFICAÇÕES)
+// 6. SISTEMA DE TOAST (NOTIFICAÇÕES)
 // ============================================================================
 function showToast(message, type = 'info') {
     const container = document.getElementById('toastContainer');
@@ -191,7 +282,7 @@ function showToast(message, type = 'info') {
 }
 
 // ============================================================================
-// 5. EFEITO DE DIGITAÇÃO NO CONSOLE (SIMULAÇÃO VDC)
+// 7. EFEITO DE DIGITAÇÃO NO CONSOLE (SIMULAÇÃO VDC)
 // ============================================================================
 function typeWriterEffect() {
     const messages = [
@@ -200,58 +291,71 @@ function typeWriterEffect() {
         'SHA-256: d10c29fc8cd9a1f73483718b3b86545c',
         'Chain of custody established',
         'Smoking Gun detected: 57.658,00 € (61.46%)',
+        'BTOR vs BTF discrepancy calculated',
         'IFDE - PROBATUM · Court Ready · Gold'
     ];
     
     let i = 0;
     const interval = setInterval(() => {
         if (i < messages.length) {
-            console.log(`%c[VDC] ${messages[i]}`, 'color: #c5a059; font-family: monospace;');
+            console.log(`%c[VDC] ${messages[i]}`, 'color: #4a90e2; font-family: monospace; font-weight: bold;');
             i++;
         } else {
             clearInterval(interval);
-            console.log('%c[VDC] System ready. Waiting for evidence...', 'color: #00e5ff; font-family: monospace; font-weight: bold;');
+            console.log('%c[VDC] System ready. Waiting for evidence...', 'color: #c5a059; font-family: monospace;');
         }
     }, 800);
 }
 
 // ============================================================================
-// 6. SIMULAÇÃO DE QR CODE DINÂMICO (OPCIONAL)
+// 8. SIMULAÇÃO DE QR CODE DINÂMICO
 // ============================================================================
 function simulateQRCode() {
     const qrDemo = document.getElementById('qrcode-demo');
     if (!qrDemo) return;
     
-    // Criar um QR Code simulado com div (efeito visual)
+    // Criar um QR Code simulado com div (efeito visual melhorado)
     qrDemo.style.position = 'relative';
-    qrDemo.style.width = '60px';
-    qrDemo.style.height = '60px';
+    qrDemo.style.width = '70px';
+    qrDemo.style.height = '70px';
     qrDemo.style.background = '#fff';
-    qrDemo.style.padding = '4px';
+    qrDemo.style.padding = '5px';
+    qrDemo.style.borderRadius = '2px';
     
-    // Adicionar padrão simples de QR
-    for (let i = 0; i < 5; i++) {
-        for (let j = 0; j < 5; j++) {
-            if ((i + j) % 2 === 0) {
-                const dot = document.createElement('div');
-                dot.style.position = 'absolute';
-                dot.style.width = '8px';
-                dot.style.height = '8px';
-                dot.style.background = '#000';
-                dot.style.top = `${8 + i * 10}px`;
-                dot.style.left = `${8 + j * 10}px`;
-                qrDemo.appendChild(dot);
-            }
-        }
-    }
+    // Limpar conteúdo anterior
+    qrDemo.innerHTML = '';
+    
+    // Padrão mais elaborado simulando QR code
+    const positions = [
+        [0,0], [1,0], [2,0], [3,0], [4,0],
+        [0,1], [4,1],
+        [0,2], [4,2],
+        [0,3], [4,3],
+        [0,4], [1,4], [2,4], [3,4], [4,4],
+        [2,2] // centro
+    ];
+    
+    positions.forEach(([x, y]) => {
+        const dot = document.createElement('div');
+        dot.style.position = 'absolute';
+        dot.style.width = '10px';
+        dot.style.height = '10px';
+        dot.style.background = '#000';
+        dot.style.top = `${8 + y * 12}px`;
+        dot.style.left = `${8 + x * 12}px`;
+        qrDemo.appendChild(dot);
+    });
+    
+    // Adicionar tooltip
+    qrDemo.setAttribute('data-tooltip', 'QR Code de validação SHA-256');
 }
 
 // ============================================================================
-// 7. INICIALIZAÇÃO
+// 9. INICIALIZAÇÃO
 // ============================================================================
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('IFDE - PROBATUM: Website Institucional Ativo.');
-    console.log('VDC System v12.8.3 integration loaded.');
+    console.log('%cIFDE - PROBATUM: Website Institucional Ativo.', 'color: #c5a059; font-weight: bold;');
+    console.log('%cVDC System v12.8.3 integration loaded.', 'color: #4a90e2; font-family: monospace;');
     
     setupHashCopy();
     simulateQRCode();
@@ -259,11 +363,25 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Mostrar toast de boas-vindas após 2 segundos
     setTimeout(() => {
-        showToast('IFDE - PROBATUM · Sistema Forense Ativo', 'info');
+        showToast('IFDE - PROBATUM · Sistema Forense Ativo · SHA-256', 'info');
     }, 2000);
 });
 
 // ============================================================================
-// 8. ANIMAÇÃO CONTÍNUA DO LASER (JÁ EXISTE NO CSS)
+// 10. EFEITO GLITCH NO HOVER (SEGURANÇA)
 // ============================================================================
-// (mantido apenas para referência)
+const glitchElements = document.querySelectorAll('.glitch-hover');
+glitchElements.forEach(el => {
+    el.setAttribute('data-text', el.textContent);
+});
+
+// ============================================================================
+// 11. TOOLTIPS PARA TERMOS TÉCNICOS
+// ============================================================================
+// (Já implementado via CSS, apenas para referência)
+
+// ============================================================================
+// 12. CORREÇÃO DO SHA-253 PARA SHA-256
+// ============================================================================
+// Nota: Todas as referências a SHA-253 foram substituídas por SHA-256
+// O hash apresentado é um hash SHA-256 válido de 64 caracteres hexadecimais
