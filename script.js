@@ -21,15 +21,13 @@ class Particle {
         this.size = Math.random() * 2 + 0.5;
         this.speedX = (Math.random() - 0.5) * 0.5;
         this.speedY = (Math.random() - 0.5) * 0.5;
-        this.color = `rgba(74, 144, 226, ${Math.random() * 0.5 + 0.2})`; // Cyan Glacial
+        this.color = `rgba(74, 144, 226, ${Math.random() * 0.5 + 0.2})`;
     }
     
     update() {
-        // Movimento normal
         this.x += this.speedX;
         this.y += this.speedY;
         
-        // Interação com rato (efeito de repulsão suave)
         const dx = this.x - mouseX;
         const dy = this.y - mouseY;
         const distance = Math.sqrt(dx * dx + dy * dy);
@@ -41,7 +39,6 @@ class Particle {
             this.y += Math.sin(angle) * force * 10;
         }
         
-        // Boundary wrapping
         if (this.x > canvas.width) this.x = 0;
         if (this.x < 0) this.x = canvas.width;
         if (this.y > canvas.height) this.y = 0;
@@ -54,7 +51,6 @@ class Particle {
         ctx.fillStyle = this.color;
         ctx.fill();
         
-        // Desenhar linhas entre partículas próximas (simulando conexões de dados)
         particles.forEach(p => {
             const dx = this.x - p.x;
             const dy = this.y - p.y;
@@ -81,7 +77,6 @@ function createParticles() {
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    // Desenhar overlay sutil
     ctx.fillStyle = 'rgba(2, 6, 23, 0.1)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
@@ -93,13 +88,11 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-// Rastrear posição do rato
 document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
 });
 
-// Inicialização
 window.addEventListener('resize', initCanvas);
 initCanvas();
 createParticles();
@@ -127,7 +120,6 @@ const revealOnScroll = () => {
     });
 };
 
-// Adicionar estilos iniciais
 revealElements.forEach(el => {
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     el.style.opacity = '0';
@@ -157,7 +149,7 @@ if (terminalLine) {
     setInterval(() => {
         terminalLine.textContent = forensicActions[actionIndex];
         terminalLine.style.animation = 'none';
-        terminalLine.offsetHeight; // trigger reflow
+        terminalLine.offsetHeight;
         terminalLine.style.animation = 'fadeIn 0.5s';
         
         actionIndex = (actionIndex + 1) % forensicActions.length;
@@ -171,7 +163,6 @@ const dropzone = document.getElementById('evidenceDropzone');
 const hashSimulation = document.getElementById('hashSimulation');
 
 if (dropzone) {
-    // Prevenir comportamento padrão de drag
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
         dropzone.addEventListener(eventName, preventDefaults, false);
     });
@@ -181,7 +172,6 @@ if (dropzone) {
         e.stopPropagation();
     }
     
-    // Highlight no drag
     ['dragenter', 'dragover'].forEach(eventName => {
         dropzone.addEventListener(eventName, () => {
             dropzone.style.borderColor = 'var(--gold)';
@@ -196,28 +186,23 @@ if (dropzone) {
         }, false);
     });
     
-    // Simular hash ao soltar ficheiro
     dropzone.addEventListener('drop', (e) => {
         e.preventDefault();
         
-        // Simular geração de hash SHA-256
         const dummyHash = 'SHA-256: ' + Array.from({length: 64}, () => 
             Math.floor(Math.random() * 16).toString(16)).join('');
         
         hashSimulation.textContent = dummyHash;
         dropzone.classList.add('dropped');
         
-        // Mostrar toast de confirmação
         showToast('Cadeia de custódia simulada com sucesso', 'success');
         
-        // Efeito visual
         dropzone.style.transform = 'scale(0.98)';
         setTimeout(() => {
             dropzone.style.transform = 'scale(1)';
         }, 200);
     });
     
-    // Também permite clique para simular
     dropzone.addEventListener('click', () => {
         const dummyHash = 'SHA-256: ' + Array.from({length: 64}, () => 
             Math.floor(Math.random() * 16).toString(16)).join('');
@@ -229,7 +214,7 @@ if (dropzone) {
 }
 
 // ============================================================================
-// 5. FUNÇÃO DE CÓPIA DE HASH (INTEGRAÇÃO VDC)
+// 5. FUNÇÃO DE CÓPIA DE HASH
 // ============================================================================
 function setupHashCopy() {
     const copyBtn = document.getElementById('copyHashBtn');
@@ -244,7 +229,6 @@ function setupHashCopy() {
             await navigator.clipboard.writeText(hash);
             showToast('Hash SHA-256 copiado para área de transferência', 'success');
             
-            // Feedback visual
             copyBtn.innerHTML = '<i class="fas fa-check"></i>';
             setTimeout(() => {
                 copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
@@ -257,7 +241,7 @@ function setupHashCopy() {
 }
 
 // ============================================================================
-// 6. SISTEMA DE TOAST (NOTIFICAÇÕES)
+// 6. SISTEMA DE TOAST
 // ============================================================================
 function showToast(message, type = 'info') {
     const container = document.getElementById('toastContainer');
@@ -282,7 +266,7 @@ function showToast(message, type = 'info') {
 }
 
 // ============================================================================
-// 7. EFEITO DE DIGITAÇÃO NO CONSOLE (SIMULAÇÃO VDC)
+// 7. EFEITO DE DIGITAÇÃO NO CONSOLE
 // ============================================================================
 function typeWriterEffect() {
     const messages = [
@@ -308,13 +292,12 @@ function typeWriterEffect() {
 }
 
 // ============================================================================
-// 8. SIMULAÇÃO DE QR CODE DINÂMICO
+// 8. SIMULAÇÃO DE QR CODE
 // ============================================================================
 function simulateQRCode() {
     const qrDemo = document.getElementById('qrcode-demo');
     if (!qrDemo) return;
     
-    // Criar um QR Code simulado com div (efeito visual melhorado)
     qrDemo.style.position = 'relative';
     qrDemo.style.width = '70px';
     qrDemo.style.height = '70px';
@@ -322,17 +305,15 @@ function simulateQRCode() {
     qrDemo.style.padding = '5px';
     qrDemo.style.borderRadius = '2px';
     
-    // Limpar conteúdo anterior
     qrDemo.innerHTML = '';
     
-    // Padrão mais elaborado simulando QR code
     const positions = [
         [0,0], [1,0], [2,0], [3,0], [4,0],
         [0,1], [4,1],
         [0,2], [4,2],
         [0,3], [4,3],
         [0,4], [1,4], [2,4], [3,4], [4,4],
-        [2,2] // centro
+        [2,2]
     ];
     
     positions.forEach(([x, y]) => {
@@ -346,12 +327,11 @@ function simulateQRCode() {
         qrDemo.appendChild(dot);
     });
     
-    // Adicionar tooltip
     qrDemo.setAttribute('data-tooltip', 'QR Code de validação SHA-256');
 }
 
 // ============================================================================
-// 9. PROTOCOLOS DE CONFORMIDADE ATIVOS (CONTEÚDO FORENSE)
+// 9. PROTOCOLOS DE CONFORMIDADE
 // ============================================================================
 const protocolContent = {
     privacidade: {
@@ -405,7 +385,6 @@ const protocolContent = {
     }
 };
 
-// Função para abrir modal de protocolo
 function openProtocol(id) {
     const modal = document.getElementById('protocolModal');
     const title = document.getElementById('modalTitle');
@@ -416,32 +395,153 @@ function openProtocol(id) {
         text.innerHTML = protocolContent[id].body;
         
         modal.style.display = 'block';
-        document.body.style.overflow = 'hidden'; // Impede scroll
+        document.body.style.overflow = 'hidden';
         
-        // Log para console (simulação de auditoria)
         console.log(`%c[VDC] Protocolo aberto: ${id} - ${protocolContent[id].title}`, 'color: #c5a059; font-family: monospace;');
     }
 }
 
-// Função para fechar modal de protocolo
 function closeProtocol() {
     const modal = document.getElementById('protocolModal');
     if (modal) {
         modal.style.display = 'none';
-        document.body.style.overflow = 'auto'; // Restaura scroll
+        document.body.style.overflow = 'auto';
     }
 }
 
-// Fechar ao clicar fora do modal
-window.onclick = function(event) {
-    const modal = document.getElementById('protocolModal');
-    if (event.target == modal) {
-        closeProtocol();
+// ============================================================================
+// 10. VISUALIZADOR DE RELATÓRIO FORENSE
+// ============================================================================
+function openForensicReport() {
+    const reportOverlay = document.getElementById('reportOverlay');
+    const reportContent = document.getElementById('reportContent');
+    
+    if (!reportOverlay || !reportContent) return;
+    
+    const currentDate = new Date().toLocaleDateString('pt-PT', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    });
+    
+    const reportTemplate = `
+        <div class="report-header-legal">
+            <div>
+                <strong>IFDE - PROBATUM</strong><br>
+                Investigação & Desenvolvimento Forense<br>
+                Ref: PER-2026-001-VDC
+            </div>
+            <div style="text-align:right">
+                <strong>CONFIDENCIAL</strong><br>
+                Cadeia de Custódia: Ativa<br>
+                Data: ${currentDate}
+            </div>
+        </div>
+
+        <div class="report-body">
+            <h1>Relatório de Peritagem Económico-Financeira</h1>
+            
+            <h2>1. OBJETO DA PERÍCIA</h2>
+            <p>Análise de fluxo de ativos e auditoria algorítmica ao Sistema de Faturação da entidade sob investigação, com recurso ao protocolo <strong>VDC (Validation of Digital Consistency)</strong> v12.8.3. O perímetro de análise compreende o período fiscal de 2025, com base nos ficheiros SAF-T (PT) e extratos de plataforma fornecidos.</p>
+
+            <h2>2. METODOLOGIA (BTOR / BTF)</h2>
+            <p>Foi aplicada a técnica de <strong>Busca Técnica Financeira (BTF)</strong> sobre os ficheiros SAF-T (PT) do período Q1-Q4, em cruzamento com os extratos operacionais (BTOR). O algoritmo de triangulação financeira do sistema VDC detetou anomalias na estrutura dos registos que sugerem manipulação de dados 'a posteriori' e/ou omissão de faturação.</p>
+
+            <h2>3. ANÁLISE DE DISCREPÂNCIAS (VDC)</h2>
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Parâmetro</th>
+                        <th>Valor Declarado (BTF)</th>
+                        <th>Valor Forense (BTOR)</th>
+                        <th>Desvio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Comissões de Intermediação</td>
+                        <td>36.154,00 €</td>
+                        <td>93.812,00 €</td>
+                        <td style="color:red; font-weight:bold">+57.658,00 € (159%)</td>
+                    </tr>
+                    <tr>
+                        <td>IVA 23% (Intermediação)</td>
+                        <td>8.315,42 €</td>
+                        <td>21.576,76 €</td>
+                        <td style="color:red; font-weight:bold">+13.261,34 €</td>
+                    </tr>
+                    <tr>
+                        <td>IVA 6% (Transporte)</td>
+                        <td>0,00 €</td>
+                        <td>3.459,48 €</td>
+                        <td style="color:red; font-weight:bold">+3.459,48 €</td>
+                    </tr>
+                    <tr>
+                        <td>Volume de Negócios Total</td>
+                        <td>333.739,00 €</td>
+                        <td>404.925,00 €</td>
+                        <td style="color:orange">+71.186,00 € (21,3%)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>4. PROVA MATERIAL DIGITAL (BLOCKCHAIN)</h2>
+            <p>Rastreio efetuado na rede Ethereum identificou a conversão de ativos em <em>Stablecoins</em> (USDT) com destino a carteiras não declaradas nos registos contabilísticos oficiais.</p>
+            <p><strong>Hash de Transação suspeita:</strong> <span class="mono-hash">0x71c9f3a2b8e4d5c6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0</span></p>
+            <p><strong>Endereço de destino:</strong> <span class="mono-hash">0x3f5a2b8e4d5c6a7b8c9d0e1f2a3b4c5d6e7f8a9b</span></p>
+            <p><strong>Cluster detetado:</strong> 3 endereços relacionados com atividade de mixer (Tornado Cash) no período em análise.</p>
+
+            <h2>5. CADEIA DE CUSTÓDIA</h2>
+            <p>Todas as evidências processadas foram seladas com hash SHA-256 e timestamp RFC 3161, garantindo a integridade e imutabilidade da prova digital. Abaixo, os hashes dos principais ficheiros analisados:</p>
+            <table class="report-table">
+                <tr>
+                    <td><strong>131509_202512.csv</strong></td>
+                    <td class="mono-hash">d098483e91961126b532263d1c889c3197b3b1272f32ca9b46b314dba8730ab0</td>
+                </tr>
+                <tr>
+                    <td><strong>extrato_dezembro.pdf</strong></td>
+                    <td class="mono-hash">b522e2ae4377b9fd39b772aea1603882b47d16971d5e95b357</td>
+                </tr>
+                <tr>
+                    <td><strong>fatura_PT1126-5834.pdf</strong></td>
+                    <td class="mono-hash">1a65fb6fdb1782bec8c167327c5a76f6ad570b1dc7f34d349a8d96739cb1ab4</td>
+                </tr>
+            </table>
+
+            <h2>6. CONCLUSÃO TÉCNICA</h2>
+            <p>Com base na evidência digital recolhida e processada pelo motor forense VDC v12.8.3, conclui-se pela <strong>existência de quebra na integridade dos dados fiscais</strong>, configurando indícios de infração prevista no Regime Geral das Infrações Tributárias (RGIT), nomeadamente:</p>
+            <ul style="list-style-type: disc; margin-left: 20px;">
+                <li>Omissão de faturação de comissões no valor de <strong>57.658,00 €</strong></li>
+                <li>Falta de liquidação de IVA (23% e 6%) no montante total de <strong>16.720,82 €</strong></li>
+                <li>Discrepância entre valores declarados em DAC7 e registos SAF-T</li>
+            </ul>
+            <p>Recomenda-se a participação à Autoridade Tributária e a instauração de procedimento de inspeção externa.</p>
+            
+            <div class="report-footer-signature">
+                <strong>Dr. Eduardo Perito</strong>
+                <small>Analista Forense de Auditoria Fiscal · Perito N.º 1827/OCP</small><br>
+                <small style="font-family: monospace;">Assinado Digitalmente (SHA-256: a1b2c3...f6e7) · RFC 3161: ${currentDate} 14:23:17 UTC</small>
+            </div>
+        </div>
+    `;
+
+    reportContent.innerHTML = reportTemplate;
+    reportOverlay.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    
+    console.log('%c[VDC] Visualizador de relatório forense aberto', 'color: #4a90e2; font-family: monospace;');
+}
+
+function closeForensicReport() {
+    const reportOverlay = document.getElementById('reportOverlay');
+    if (reportOverlay) {
+        reportOverlay.style.display = 'none';
+        document.body.style.overflow = 'auto';
     }
-};
+}
 
 // ============================================================================
-// 10. INICIALIZAÇÃO
+// 11. INICIALIZAÇÃO
 // ============================================================================
 document.addEventListener('DOMContentLoaded', () => {
     console.log('%cIFDE - PROBATUM: Website Institucional Ativo.', 'color: #c5a059; font-weight: bold;');
@@ -451,14 +551,13 @@ document.addEventListener('DOMContentLoaded', () => {
     simulateQRCode();
     typeWriterEffect();
     
-    // Mostrar toast de boas-vindas após 2 segundos
     setTimeout(() => {
         showToast('IFDE - PROBATUM · Sistema Forense Ativo · SHA-256', 'info');
     }, 2000);
 });
 
 // ============================================================================
-// 11. EFEITO GLITCH NO HOVER (SEGURANÇA)
+// 12. EFEITO GLITCH NO HOVER
 // ============================================================================
 const glitchElements = document.querySelectorAll('.glitch-hover');
 glitchElements.forEach(el => {
@@ -466,7 +565,24 @@ glitchElements.forEach(el => {
 });
 
 // ============================================================================
-// 12. EXPOR FUNÇÕES GLOBALMENTE (PARA ONCLICK NO HTML)
+// 13. FECHAR MODAL CLICANDO FORA
+// ============================================================================
+window.onclick = function(event) {
+    const modal = document.getElementById('protocolModal');
+    if (event.target == modal) {
+        closeProtocol();
+    }
+    
+    const reportOverlay = document.getElementById('reportOverlay');
+    if (event.target == reportOverlay) {
+        closeForensicReport();
+    }
+};
+
+// ============================================================================
+// 14. EXPOR FUNÇÕES GLOBALMENTE
 // ============================================================================
 window.openProtocol = openProtocol;
 window.closeProtocol = closeProtocol;
+window.openForensicReport = openForensicReport;
+window.closeForensicReport = closeForensicReport;
