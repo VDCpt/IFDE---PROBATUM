@@ -351,7 +351,89 @@ function simulateQRCode() {
 }
 
 // ============================================================================
-// 9. INICIALIZAÇÃO
+// 9. PROTOCOLOS LEGAIS (MODAIS)
+// ============================================================================
+const protocols = {
+    privacidade: `
+        <h3>POLÍTICA DE PRIVACIDADE E SIGILO PERICIAL</h3>
+        <p>A IFDE - PROBATUM opera sob o princípio do <strong>Privilégio Profissional</strong> e da confidencialidade absoluta. Todos os dados processados pelo motor VDC v12.8.3 são sujeitos a:</p>
+        <ul>
+            <li><strong>Criptografia AES-256</strong> em repouso e <strong>TLS 1.3</strong> em trânsito, garantindo a inviolabilidade dos dados durante todo o processo pericial.</li>
+            <li><strong>Eliminação definitiva de metadados</strong> após a entrega do relatório pericial final, conforme o princípio da minimização de dados (art. 5.º RGPD).</li>
+            <li><strong>Acesso restrito baseado no princípio 'Need-to-Know'</strong>, com registo de acessos auditável e selo temporal RFC 3161.</li>
+            <li><strong>Segregação funcional</strong> entre a equipa de análise forense e a equipa de consultoria jurídica.</li>
+        </ul>
+        <p>O sigilo profissional é garantido pelo <strong>Decreto-Lei n.º 28/2019</strong> e pelas normas ISO/IEC 27037, assegurando que toda a comunicação com os mandatários é protegida por privilégio legal.</p>`,
+    
+    termos: `
+        <h3>TERMOS LEGAIS E CONDIÇÕES DE PERITAGEM</h3>
+        <p>Os pareceres emitidos pela IFDE - PROBATUM constituem <strong>prova técnica material</strong> nos termos do art. 163.º do Código de Processo Civil. A responsabilidade da consultoria limita-se à integridade dos dados extraídos e analisados conforme o <strong>Decreto-Lei n.º 28/2019</strong> e a norma <strong>ISO/IEC 27037</strong>.</p>
+        <p><strong>Condições específicas:</strong></p>
+        <ul>
+            <li>A integridade dos dados é garantida pelo <strong>Master Hash SHA-256</strong> constante no rodapé de cada relatório.</li>
+            <li>A cadeia de custódia é documentada com <strong>timestamps RFC 3161</strong> e hashes individuais de cada evidência.</li>
+            <li>Qualquer tentativa de engenharia reversa no sistema VDC v12.8.3 será objeto de ação judicial imediata ao abrigo do <strong>art. 6.º da Lei do Cibercrime (Lei n.º 109/2009)</strong>.</li>
+            <li>Os relatórios periciais são válidos por tempo indeterminado, sendo a sua integridade verificável através do QR Code anexo.</li>
+        </ul>`,
+    
+    rgpd: `
+        <h3>CONFORMIDADE RGPD (REGULAMENTO 2016/679)</h3>
+        <p>Como subcontratante de dados para efeitos judiciais (alínea h) do n.º 1 do art. 9.º RGPD), a IFDE - PROBATUM garante:</p>
+        <ul>
+            <li><strong>DPO (Data Protection Officer)</strong> dedicado a processos forenses, com contacto direto para os mandatários.</li>
+            <li><strong>Registo de Atividades de Tratamento (RAT)</strong> auditável e disponível para fiscalização pela CNPD.</li>
+            <li><strong>Protocolos de notificação de brechas</strong> em menos de 12 horas, conforme art. 33.º RGPD.</li>
+            <li><strong>Anonimização de dados</strong> em demonstrações e casos simulados, com eliminação de identificadores diretos (NIF, nome, morada).</li>
+        </ul>
+        <p>O tratamento de dados é limitado ao estritamente necessário para a produção da prova pericial, sendo os dados eliminados no prazo máximo de 60 dias após a conclusão do processo.</p>`,
+    
+    certificacoes: `
+        <h3>CERTIFICAÇÕES E STANDARDS TÉCNICOS</h3>
+        <p>A nossa metodologia segue rigorosamente os padrões internacionais de computação forense e auditoria digital:</p>
+        <ul>
+            <li><strong>ISO/IEC 27037:</strong> Linhas de orientação para identificação, recolha, aquisição e preservação de prova digital.</li>
+            <li><strong>ISO/IEC 27001:</strong> Sistema de Gestão de Segurança da Informação (SGSI) aplicado a processos forenses.</li>
+            <li><strong>RFC 3161:</strong> Protocolo de selo temporal para validade jurídica (Internet X.509 Public Key Infrastructure Time-Stamp Protocol).</li>
+            <li><strong>NIST SP 800-86:</strong> Guide to Integrating Forensic Techniques into Incident Response.</li>
+            <li><strong>Selo de Excelência VDC:</strong> Algoritmo proprietário de deteção de discrepâncias financeiras, validado por auditoria externa.</li>
+        </ul>
+        <p>O motor forense VDC v12.8.3 é auditado trimestralmente por entidade independente, garantindo a conformidade com os standards internacionais.</p>`
+};
+
+// Função para abrir modal de protocolo
+function openProtocol(id) {
+    const modal = document.getElementById('protocolModal');
+    const textZone = document.getElementById('protocolText');
+    
+    if (modal && textZone && protocols[id]) {
+        textZone.innerHTML = protocols[id];
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Impede scroll
+        
+        // Log para console (simulação de auditoria)
+        console.log(`%c[VDC] Protocolo aberto: ${id}`, 'color: #c5a059; font-family: monospace;');
+    }
+}
+
+// Função para fechar modal de protocolo
+function closeProtocol() {
+    const modal = document.getElementById('protocolModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Restaura scroll
+    }
+}
+
+// Fechar ao clicar fora do modal
+window.onclick = function(event) {
+    const modal = document.getElementById('protocolModal');
+    if (event.target == modal) {
+        closeProtocol();
+    }
+};
+
+// ============================================================================
+// 10. INICIALIZAÇÃO
 // ============================================================================
 document.addEventListener('DOMContentLoaded', () => {
     console.log('%cIFDE - PROBATUM: Website Institucional Ativo.', 'color: #c5a059; font-weight: bold;');
@@ -368,7 +450,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============================================================================
-// 10. EFEITO GLITCH NO HOVER (SEGURANÇA)
+// 11. EFEITO GLITCH NO HOVER (SEGURANÇA)
 // ============================================================================
 const glitchElements = document.querySelectorAll('.glitch-hover');
 glitchElements.forEach(el => {
@@ -376,12 +458,7 @@ glitchElements.forEach(el => {
 });
 
 // ============================================================================
-// 11. TOOLTIPS PARA TERMOS TÉCNICOS
+// 12. EXPOR FUNÇÕES GLOBALMENTE (PARA ONCLICK NO HTML)
 // ============================================================================
-// (Já implementado via CSS, apenas para referência)
-
-// ============================================================================
-// 12. CORREÇÃO DO SHA-253 PARA SHA-256
-// ============================================================================
-// Nota: Todas as referências a SHA-253 foram substituídas por SHA-256
-// O hash apresentado é um hash SHA-256 válido de 64 caracteres hexadecimais
+window.openProtocol = openProtocol;
+window.closeProtocol = closeProtocol;
