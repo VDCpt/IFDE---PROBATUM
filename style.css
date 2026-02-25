@@ -8,8 +8,8 @@
     --text-silver: #cbd5e1;
     --text-light: #f1f5f9;
     --text-muted: #94a3b8;
-    --cyan-glacial: #4a90e2;
-    --cyan-dark: #2a5a9c;
+    --cyan-glacial: #00e5ff;
+    --cyan-dark: #0099b8;
     --warn-red: #ef4444;
     --warn-orange: #f59e0b;
     --font-main: 'Inter', sans-serif;
@@ -29,6 +29,7 @@ body {
     background-color: var(--bg-black);
     color: var(--text-silver);
     font-family: var(--font-main);
+    font-weight: 400;
     line-height: 1.6;
     overflow-x: hidden;
     position: relative;
@@ -39,68 +40,88 @@ body {
     position: fixed;
     width: 100%;
     height: 1px;
-    background: var(--cyan-glacial);
-    box-shadow: 0 0 10px var(--cyan-glacial), 0 0 20px var(--cyan-glacial);
+    background: #00e5ff;
+    box-shadow: 0 0 8px #00e5ff, 0 0 15px #00e5ff, 0 0 30px rgba(0, 229, 255, 0.6);
     top: 0;
     left: 0;
     animation: scanH 8s infinite linear;
     z-index: 9999;
     pointer-events: none;
-    opacity: 0.2;
+    opacity: 0.8;
 }
 
 .laser-v {
     position: fixed;
     width: 1px;
     height: 100%;
-    background: var(--cyan-glacial);
-    box-shadow: 0 0 10px var(--cyan-glacial), 0 0 20px var(--cyan-glacial);
+    background: #00e5ff;
+    box-shadow: 0 0 8px #00e5ff, 0 0 15px #00e5ff, 0 0 30px rgba(0, 229, 255, 0.6);
     top: 0;
     left: 0;
     animation: scanV 8s infinite linear;
     z-index: 9999;
     pointer-events: none;
-    opacity: 0.2;
+    opacity: 0.8;
 }
 
 @keyframes scanH {
     0% { top: 0; opacity: 0; }
-    5% { opacity: 0.2; }
-    95% { opacity: 0.2; }
+    5% { opacity: 0.8; }
+    95% { opacity: 0.8; }
     100% { top: 100%; opacity: 0; }
 }
 
 @keyframes scanV {
     0% { left: 0; opacity: 0; }
-    5% { opacity: 0.2; }
-    95% { opacity: 0.2; }
+    5% { opacity: 0.8; }
+    95% { opacity: 0.8; }
     100% { left: 100%; opacity: 0; }
 }
 
-/* Tooltips para Glossário Técnico */
 .term {
     position: relative;
     cursor: help;
-    border-bottom: 1px dotted var(--cyan-glacial);
-    color: var(--cyan-glacial);
+    border-bottom: 1px dotted #00e5ff;
+    color: #00e5ff;
+    transition: color 0.2s;
+}
+
+.term:hover {
+    color: #ffffff;
 }
 
 .term:hover::after {
     content: attr(data-tooltip);
     position: absolute;
-    bottom: 150%;
+    bottom: 160%;
     left: 50%;
     transform: translateX(-50%);
-    background: #000;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border-radius: 2px;
-    font-size: 0.7rem;
+    /* Glassmorphism */
+    background: rgba(2, 6, 23, 0.82);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    color: #e2e8f0;
+    padding: 0.55rem 1rem;
+    border-radius: 4px;
+    font-size: 0.72rem;
     white-space: nowrap;
-    z-index: 1000;
-    border: 1px solid var(--cyan-glacial);
-    box-shadow: 0 0 10px var(--cyan-glacial);
+    z-index: 9999;
+    border: 1px solid rgba(0, 229, 255, 0.35);
+    box-shadow: 0 0 12px rgba(0, 229, 255, 0.25), 0 8px 32px rgba(0, 0, 0, 0.6);
     font-family: var(--font-mono);
+    pointer-events: none;
+    letter-spacing: 0.02em;
+}
+
+.term:hover::before {
+    content: '';
+    position: absolute;
+    bottom: 145%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: rgba(0, 229, 255, 0.35);
+    z-index: 9999;
     pointer-events: none;
 }
 
@@ -285,6 +306,7 @@ body {
     margin-bottom: 1.5rem;
     color: #fff;
     font-weight: 800;
+    font-family: 'Inter', sans-serif;
     line-height: 1.2;
     text-transform: uppercase;
 }
@@ -294,6 +316,8 @@ body {
     max-width: 700px;
     margin: 0 auto 3rem;
     color: var(--text-muted);
+    font-weight: 400;
+    font-family: 'Inter', sans-serif;
 }
 
 /* Dropzone Simulado */
@@ -546,11 +570,13 @@ h2 {
 }
 
 .quantum-card {
-    background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(245, 158, 11, 0.15) 100%);
-    border: 2px solid var(--warn-red);
+    /* Cyan Glacial Lab — Neutralidade Forense v13.1.0-ELITE-GOLD */
+    background: linear-gradient(135deg, rgba(74, 144, 226, 0.08) 0%, rgba(197, 160, 89, 0.05) 100%);
+    border: 2px solid var(--cyan-glacial);
     border-radius: 4px;
     padding: 2rem;
-    box-shadow: 0 0 30px rgba(239, 68, 68, 0.3);
+    box-shadow: 0 0 20px rgba(74, 144, 226, 0.18);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .quantum-header {
@@ -558,7 +584,7 @@ h2 {
     align-items: center;
     gap: 1rem;
     margin-bottom: 1.5rem;
-    color: var(--warn-red);
+    color: var(--cyan-glacial);
 }
 
 .quantum-header i {
@@ -574,11 +600,11 @@ h2 {
 .quantum-value {
     font-size: 3rem;
     font-weight: 900;
-    color: var(--warn-red);
+    color: var(--cyan-glacial);
     font-family: var(--font-mono);
     text-align: center;
     margin-bottom: 1rem;
-    text-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+    text-shadow: 0 0 20px rgba(74, 144, 226, 0.4);
 }
 
 .quantum-detail {
@@ -594,7 +620,7 @@ h2 {
 }
 
 .percent-badge {
-    background: var(--warn-red);
+    background: var(--gold);
     color: #000;
     padding: 2px 8px;
     border-radius: 2px;
@@ -611,7 +637,7 @@ h2 {
     display: flex;
     justify-content: space-between;
     padding: 0.5rem 0;
-    border-bottom: 1px solid rgba(239, 68, 68, 0.2);
+    border-bottom: 1px solid rgba(74, 144, 226, 0.15);
     font-family: var(--font-mono);
     font-size: 0.8rem;
 }
@@ -621,7 +647,7 @@ h2 {
 }
 
 .breakdown-row.highlight {
-    color: var(--warn-red);
+    color: var(--cyan-glacial);
     font-weight: 700;
 }
 
@@ -715,33 +741,30 @@ h2 {
     position: absolute;
     left: 0;
     top: 0;
-    color: var(--warn-red);
-    opacity: 0.5;
+    color: var(--cyan-glacial);
+    opacity: 0.4;
     transform: translate(-2px, -2px);
     pointer-events: none;
 }
 
+/* ── QR Code Real (Dynamic Hash-to-QR) v13.1.0-ELITE-GOLD ── */
 .qr-demo {
-    width: 60px;
-    height: 60px;
-    background: #fff;
+    width: 98px;
+    height: 98px;
+    background: #ffffff;
     position: relative;
     overflow: hidden;
     padding: 4px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease;
 }
 
-.qr-demo::before {
-    content: '';
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    width: 10px;
-    height: 10px;
-    background: #000;
-    box-shadow: 15px 0 0 #000, 0 15px 0 #000, 15px 15px 0 #000,
-                30px 0 0 #000, 30px 15px 0 #000,
-                0 30px 0 #000, 15px 30px 0 #000, 30px 30px 0 #000;
+.qr-demo:hover {
+    box-shadow: 0 0 12px rgba(74, 144, 226, 0.5);
 }
+
+/* ::before mock estático REMOVIDO — QR real gerado por generateRealQRCode() */
 
 /* Botão de Acesso ao Relatório */
 .report-trigger-container {
@@ -1475,3 +1498,70 @@ h2 {
         font-size: 0.9rem;
     }
 }
+
+
+/* ── Tipografia: JetBrains Mono EXCLUSIVO para hashes, logs e código ── */
+.hash-value,
+.mono-code,
+.hash-simulation,
+.code-block,
+.terminal-line,
+.terminal-title,
+.breakdown-row,
+.quantum-value,
+.stat-value,
+.version-badge,
+.forensic-badge,
+.tech-tag,
+.hash-label,
+.hash-timestamp,
+.mono-label,
+.report-body .mono-hash {
+    font-family: 'JetBrains Mono', monospace !important;
+}
+
+/* ── Corpo de texto geral: Inter 400 ── */
+p, li, span:not(.version-badge):not(.hash-value):not(.mono-code):not(.stat-value):not(.terminal-title):not(.terminal-line):not(.terminal-status):not(.hash-label):not(.forensic-badge):not(.tech-tag) {
+    font-family: 'Inter', sans-serif;
+}
+
+/* ═══ FIM — Tipografia · v13.1.0-ELITE-GOLD ═══ */ — Materialidade ≥ 25%  (v13.1.0-ELITE-GOLD)
+   ─────────────────────────────────────────────────────────────────────
+   Princípio: Apenas o PERÍMETRO (border) muda a vermelho.
+   Background permanece Cyan Glacial Lab (presunção de inocência na UI).
+   Activar com: element.classList.add('threshold-alert-25')
+   ─────────────────────────────────────────────────────────────────────
+   Lógica de aplicação (JS):
+     const pct = parseFloat(document.querySelector('.percent-badge')
+                   ?.textContent) || 0;
+     if (pct > 25) {
+         document.querySelector('.quantum-card')
+             ?.classList.add('threshold-alert-25');
+     }
+   ═══════════════════════════════════════════════════════════════════════ */
+@keyframes threshold-border-pulse {
+    0%, 100% {
+        border-color: #ef4444;
+        box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.35),
+                    0 0 16px rgba(239, 68, 68, 0.2);
+    }
+    50% {
+        border-color: rgba(239, 68, 68, 0.45);
+        box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.12),
+                    0 0 6px rgba(239, 68, 68, 0.06);
+    }
+}
+
+.threshold-alert-25 {
+    /* APENAS borda vermelha pulsante — background não declarado (herda cyan neutro) */
+    border-color: #ef4444 !important;
+    animation: threshold-border-pulse 1.4s ease-in-out infinite;
+}
+
+.threshold-alert-25 .percent-badge {
+    /* Badge numérica: vermelho apenas quando threshold activo */
+    background: #ef4444 !important;
+    color: #ffffff !important;
+}
+
+/* ═══ FIM — style.css · v13.1.0-ELITE-GOLD · DORA COMPLIANT · COURT READY ═══ */
