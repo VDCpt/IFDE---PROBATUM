@@ -270,13 +270,13 @@ function showToast(message, type = 'info') {
 // ============================================================================
 function typeWriterEffect() {
     const messages = [
-        'VDC System v12.8.3 initializing...',
+        'VDC System v13.1.0-ELITE-GOLD · DORA COMPLIANT · COURT READY initializing...',
         'Loading forensic modules...',
         'SHA-256: d10c29fc8cd9a1f73483718b3b86545c',
         'Chain of custody established',
         'Smoking Gun detected: 57.658,00 € (61.46%)',
         'BTOR vs BTF discrepancy calculated',
-        'IFDE - PROBATUM · Court Ready · Gold'
+        'IFDE - PROBATUM · v13.1.0-ELITE-GOLD · DORA COMPLIANT · COURT READY · Data Proxy: Fleet Extract'
     ];
     
     let i = 0;
@@ -292,43 +292,90 @@ function typeWriterEffect() {
 }
 
 // ============================================================================
-// 8. SIMULAÇÃO DE QR CODE
+// 8. DYNAMIC HASH-TO-QR MAPPING — v13.1.0-ELITE-GOLD · DORA COMPLIANT
 // ============================================================================
-function simulateQRCode() {
-    const qrDemo = document.getElementById('qrcode-demo');
-    if (!qrDemo) return;
-    
-    qrDemo.style.position = 'relative';
-    qrDemo.style.width = '70px';
-    qrDemo.style.height = '70px';
-    qrDemo.style.background = '#fff';
-    qrDemo.style.padding = '5px';
-    qrDemo.style.borderRadius = '2px';
-    
-    qrDemo.innerHTML = '';
-    
-    const positions = [
-        [0,0], [1,0], [2,0], [3,0], [4,0],
-        [0,1], [4,1],
-        [0,2], [4,2],
-        [0,3], [4,3],
-        [0,4], [1,4], [2,4], [3,4], [4,4],
-        [2,2]
-    ];
-    
-    positions.forEach(([x, y]) => {
-        const dot = document.createElement('div');
-        dot.style.position = 'absolute';
-        dot.style.width = '10px';
-        dot.style.height = '10px';
-        dot.style.background = '#000';
-        dot.style.top = `${8 + y * 12}px`;
-        dot.style.left = `${8 + x * 12}px`;
-        qrDemo.appendChild(dot);
-    });
-    
-    qrDemo.setAttribute('data-tooltip', 'QR Code de validação SHA-256');
+// Substitui simulateQRCode() (mock estático) por gerador real SHA-256.
+// O QR Code constitui PROVA MATERIAL de integridade forense:
+//   • Payload determinístico: IFDE|VDC-v13.1.0-ELITE-GOLD|<SHA256_HEX_64>
+//   • Mesmo hash → mesmo QR (reproducibilidade forense; Zero-Trust)
+//   • Fallback texto se qrcode.js não carregar (não bloqueia perícia)
+//   • Clicar no QR copia o hash para validação independente
+// Biblioteca: qrcode.js (CDN injectado no HTML antes deste script)
+// ============================================================================
+function generateRealQRCode() {
+    const qrContainer = document.getElementById('qrcode-demo');
+    if (!qrContainer) { return; }
+
+    // Ler Master Hash SHA-256 do DOM (único source-of-truth)
+    const hashEl = document.getElementById('masterHash');
+    const masterHashValue = hashEl
+        ? (hashEl.dataset.hash || hashEl.textContent.trim())
+        : 'HASH_INDISPONIVEL';
+
+    // Payload mínimo e determinístico — sem timestamp variável
+    const qrPayload = 'IFDE|VDC-v13.1.0-ELITE-GOLD|' + masterHashValue;
+
+    // Purgar instância anterior (evita sobreposição de canvas)
+    qrContainer.innerHTML = '';
+
+    if (typeof QRCode !== 'undefined') {
+        try {
+            new QRCode(qrContainer, {
+                text:         qrPayload,
+                width:        90,
+                height:       90,
+                colorDark:    '#000000',
+                colorLight:   '#ffffff',
+                correctLevel: QRCode.CorrectLevel.M
+            });
+
+            // Metadados forenses no container
+            qrContainer.setAttribute('data-hash',    masterHashValue);
+            qrContainer.setAttribute('data-payload', qrPayload);
+            qrContainer.setAttribute('aria-label',
+                'QR Code SHA-256: ' + masterHashValue.substring(0, 16) + '...');
+            qrContainer.setAttribute('title',
+                'Master Hash SHA-256 (IFDE VDC v13.1.0-ELITE-GOLD)\n' + masterHashValue);
+            qrContainer.setAttribute('data-tooltip',
+                'QR Code de integridade SHA-256 · Clique para copiar hash');
+            qrContainer.style.cursor = 'pointer';
+
+            // Click → copia hash para validação independente
+            qrContainer.addEventListener('click', function onQRClick() {
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(masterHashValue)
+                        .then(function() {
+                            showToast('Master Hash SHA-256 copiado · Valide em qualquer verificador', 'success');
+                        })
+                        .catch(function() {
+                            showToast('Hash: ' + masterHashValue.substring(0, 20) + '...', 'info');
+                        });
+                }
+            });
+
+            console.log('%c[VDC] QR Code SHA-256 gerado · ' + masterHashValue.substring(0, 16) + '...',
+                'color: #4a90e2; font-family: monospace;');
+
+        } catch (qrErr) {
+            // Fallback forense: hash em texto se qrcode.js falhar
+            qrContainer.innerHTML =
+                '<span style="font-family:monospace;font-size:0.45rem;'
+                + 'word-break:break-all;color:#4a90e2;display:block;padding:4px;">'
+                + masterHashValue + '</span>';
+            console.warn('[VDC] QRCode lib error — hash como texto:', qrErr);
+        }
+    } else {
+        // qrcode.js não carregou — fallback texto; não bloqueia perícia
+        qrContainer.innerHTML =
+            '<span style="font-family:monospace;font-size:0.45rem;'
+            + 'word-break:break-all;color:#4a90e2;display:block;padding:4px;">'
+            + masterHashValue + '</span>';
+        console.warn('[VDC] QRCode library not loaded — fallback texto activo');
+    }
 }
+
+// Alias de retrocompatibilidade (garante que chamadas legacy não quebram)
+function simulateQRCode() { generateRealQRCode(); }
 
 // ============================================================================
 // 9. PROTOCOLOS DE CONFORMIDADE
@@ -337,7 +384,7 @@ const protocolContent = {
     privacidade: {
         title: "P001 - POLÍTICA DE PRIVACIDADE E SIGILO PERICIAL",
         body: `<h3>Dever de Sigilo Profissional · Art. 135.º CP</h3>
-               <p>A IFDE - PROBATUM opera sob o princípio da <strong>inviolabilidade do segredo pericial</strong>. Todos os dados recolhidos no âmbito do Sistema VDC v12.8.3 são processados em ambientes segregados (Air-Gapped quando necessário), garantindo a confidencialidade absoluta das informações dos mandatários.</p>
+               <p>A IFDE - PROBATUM opera sob o princípio da <strong>inviolabilidade do segredo pericial</strong>. Todos os dados recolhidos no âmbito do Sistema VDC v13.1.0-ELITE-GOLD são processados em ambientes segregados (Air-Gapped quando necessário), garantindo a confidencialidade absoluta das informações dos mandatários.</p>
                <ul>
                    <li><strong>Criptografia de nível militar AES-256</strong> para dados em repouso, com chaves geradas localmente no ambiente do cliente.</li>
                    <li><strong>Protocolo Zero-Knowledge:</strong> Não retemos chaves de desencriptação dos clientes, impossibilitando o acesso não autorizado.</li>
@@ -349,7 +396,7 @@ const protocolContent = {
     termos: {
         title: "T002 - TERMOS LEGAIS E CONDIÇÕES DE PERITAGEM",
         body: `<h3>Enquadramento Jurídico da Peritagem</h3>
-               <p>Os serviços prestados pela IFDE - PROBATUM constituem <strong>perícia técnica de assistência</strong> conforme os art. 467.º a 489.º do Código de Processo Civil e art. 151.º a 157.º do Código de Processo Penal. O Sistema VDC v12.8.3 é uma ferramenta de apoio à decisão e não substitui o juízo crítico do perito nomeado pelo tribunal.</p>
+               <p>Os serviços prestados pela IFDE - PROBATUM constituem <strong>perícia técnica de assistência</strong> conforme os art. 467.º a 489.º do Código de Processo Civil e art. 151.º a 157.º do Código de Processo Penal. O Sistema VDC v13.1.0-ELITE-GOLD é uma ferramenta de apoio à decisão e não substitui o juízo crítico do perito nomeado pelo tribunal.</p>
                <ul>
                    <li><strong>Propriedade Intelectual:</strong> Os algoritmos de deteção de discrepâncias (BTOR/BTF), os schemas de mapeamento e o motor de triangulação financeira são propriedade exclusiva da IFDE - PROBATUM, protegidos nos termos do Código do Direito de Autor.</li>
                    <li><strong>Validade probatória:</strong> Os relatórios são assinados digitalmente com selo temporal RFC 3161 e hash SHA-256, garantindo a integridade e não-repúdio da prova.</li>
@@ -381,7 +428,7 @@ const protocolContent = {
                    <li><strong>ISO 9001:2015:</strong> Gestão de qualidade em processos de auditoria económica e financeira.</li>
                    <li><strong>Selo de Excelência VDC:</strong> Algoritmo proprietário de deteção de discrepâncias financeiras, validado por auditoria externa da Deloitte (2025).</li>
                </ul>
-               <p>O motor forense VDC v12.8.3 é auditado trimestralmente por entidade independente, garantindo a conformidade com os standards internacionais e a precisão matemática dos cálculos periciais.</p>`
+               <p>O motor forense VDC v13.1.0-ELITE-GOLD é auditado trimestralmente por entidade independente, garantindo a conformidade com os standards internacionais e a precisão matemática dos cálculos periciais.</p>`
     }
 };
 
@@ -442,10 +489,11 @@ function openForensicReport() {
             <h1>Relatório de Peritagem Económico-Financeira</h1>
             
             <h2>1. OBJETO DA PERÍCIA</h2>
-            <p>Análise de fluxo de ativos e auditoria algorítmica ao Sistema de Faturação da entidade sob investigação, com recurso ao protocolo <strong>VDC (Validation of Digital Consistency)</strong> v12.8.3. O perímetro de análise compreende o período fiscal de 2025, com base nos ficheiros SAF-T (PT) e extratos de plataforma fornecidos.</p>
+            <p>Análise de fluxo de ativos e auditoria algorítmica ao Sistema de Faturação da entidade sob investigação, com recurso ao protocolo <strong>VDC (Validation of Digital Consistency)</strong> v13.1.0-ELITE-GOLD. O perímetro de análise compreende o período fiscal de 2025, com base nos ficheiros SAF-T (PT) e extratos de plataforma fornecidos.</p>
 
-            <h2>2. METODOLOGIA (BTOR / BTF)</h2>
-            <p>Foi aplicada a técnica de <strong>Busca Técnica Financeira (BTF)</strong> sobre os ficheiros SAF-T (PT) do período Q1-Q4, em cruzamento com os extratos operacionais (BTOR). O algoritmo de triangulação financeira do sistema VDC detetou anomalias na estrutura dos registos que sugerem manipulação de dados 'a posteriori' e/ou omissão de faturação.</p>
+            <h2>2. METODOLOGIA (BTOR / BTF) · Data Proxy: Fleet Extract</h2>
+            <p><strong>[Nota Metodológica · DORA COMPLIANT]</strong> Os dados operacionais são obtidos por <em>Data Proxy: Fleet Extract</em> — extracção directa dos registos da plataforma/frota, constituindo prova primária independente da faturação declarada. Esta abordagem garante imutabilidade e rastreabilidade total da fonte probatória (ISO/IEC 27037 · RFC 3161).</p>
+            <p>Foi aplicada a técnica de <strong>Busca Técnica Financeira (BTF)</strong> sobre os ficheiros SAF-T (PT) do período Q1-Q4, em cruzamento com os extratos operacionais (BTOR). O algoritmo de triangulação financeira do sistema VDC detetou anomalias na estrutura dos registos que sugerem manipulação de dados 'a posteriori' e/ou diferencial de base em análise.</p>
 
             <h2>3. ANÁLISE DE DISCREPÂNCIAS (VDC)</h2>
             <table class="report-table">
@@ -462,25 +510,25 @@ function openForensicReport() {
                         <td>Comissões de Intermediação</td>
                         <td>36.154,00 €</td>
                         <td>93.812,00 €</td>
-                        <td style="color:red; font-weight:bold">+57.658,00 € (159%)</td>
+                        <td style="color:#d97706; font-weight:bold">+57.658,00 € (159%)</td>
                     </tr>
                     <tr>
                         <td>IVA 23% (Intermediação)</td>
                         <td>8.315,42 €</td>
                         <td>21.576,76 €</td>
-                        <td style="color:red; font-weight:bold">+13.261,34 €</td>
+                        <td style="color:#d97706; font-weight:bold">+13.261,34 €</td>
                     </tr>
                     <tr>
                         <td>IVA 6% (Transporte)</td>
                         <td>0,00 €</td>
                         <td>3.459,48 €</td>
-                        <td style="color:red; font-weight:bold">+3.459,48 €</td>
+                        <td style="color:#d97706; font-weight:bold">+3.459,48 €</td>
                     </tr>
                     <tr>
                         <td>Volume de Negócios Total</td>
                         <td>333.739,00 €</td>
                         <td>404.925,00 €</td>
-                        <td style="color:orange">+71.186,00 € (21,3%)</td>
+                        <td style="color:#ca8a04">+71.186,00 € (21,3%)</td>
                     </tr>
                 </tbody>
             </table>
@@ -509,9 +557,9 @@ function openForensicReport() {
             </table>
 
             <h2>6. CONCLUSÃO TÉCNICA</h2>
-            <p>Com base na evidência digital recolhida e processada pelo motor forense VDC v12.8.3, conclui-se pela <strong>existência de quebra na integridade dos dados fiscais</strong>, configurando indícios de infração prevista no Regime Geral das Infrações Tributárias (RGIT), nomeadamente:</p>
+            <p>Com base na evidência digital recolhida e processada pelo motor forense VDC v13.1.0-ELITE-GOLD, conclui-se pela <strong>existência de quebra na integridade dos dados fiscais</strong>, configurando indícios de infração prevista no Regime Geral das Infrações Tributárias (RGIT), nomeadamente:</p>
             <ul style="list-style-type: disc; margin-left: 20px;">
-                <li>Omissão de faturação de comissões no valor de <strong>57.658,00 €</strong></li>
+                <li>Diferencial de faturação de Despesas/Comissões no valor de <strong>57.658,00 €</strong></li>
                 <li>Falta de liquidação de IVA (23% e 6%) no montante total de <strong>16.720,82 €</strong></li>
                 <li>Discrepância entre valores declarados em DAC7 e registos SAF-T</li>
             </ul>
@@ -545,10 +593,10 @@ function closeForensicReport() {
 // ============================================================================
 document.addEventListener('DOMContentLoaded', () => {
     console.log('%cIFDE - PROBATUM: Website Institucional Ativo.', 'color: #c5a059; font-weight: bold;');
-    console.log('%cVDC System v12.8.3 integration loaded.', 'color: #4a90e2; font-family: monospace;');
+    console.log('%cVDC System v13.1.0-ELITE-GOLD · DORA COMPLIANT loaded.', 'color: #4a90e2; font-family: monospace;');
     
     setupHashCopy();
-    simulateQRCode();
+    generateRealQRCode();
     typeWriterEffect();
     
     setTimeout(() => {
