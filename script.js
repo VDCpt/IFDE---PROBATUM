@@ -428,7 +428,7 @@ const protocolContent = {
                    <li><strong>ISO 9001:2015:</strong> Gestão de qualidade em processos de auditoria económica e financeira.</li>
                    <li><strong>Certificação de Integridade IFDE:</strong> Algoritmo de deteção de discrepâncias financeiras em conformidade com o Regulamento (UE) 2022/2554 (DORA) e normas internacionais de auditoria algorítmica.</li>
                </ul>
-               <p>O motor forense IFDE PROBATUM v13.1.0-ELITE-GOLD é auditado trimestralmente por entidade independente, garantindo a conformidade com os standards internacionais e a precisão matemática dos cálculos periciais.</p>`
+               <p><strong>Protocolo de Integridade IFDE PROBATUM:</strong> Algoritmo proprietário desenvolvido para análise de discrepâncias financeiras, estruturado sob os princípios de resiliência digital do Regulamento (UE) 2022/2554 (DORA). A precisão matemática e a custódia dos dados são asseguradas por hashing SHA-256 e verificadas pelo Responsável em cada relatório final, garantindo a conformidade com as Normas Internacionais de Auditoria e a legislação nacional vigente.</p>`
     }
 };
 
