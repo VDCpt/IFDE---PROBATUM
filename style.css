@@ -1,21 +1,27 @@
+/* 
+ * UNIFED – PROBATUM v13.1.7-GOLD · DORA COMPLIANT
+ * Tema: Aço Escovado (Brushed Steel) com Cyan Glacial
+ * Atualizado: 2026-03-03
+ */
+
 :root {
-    --bg-black: #020617;
+    --bg-black: #0a0e14;
     --bg-darker: #000000;
-    --bg-card: #0f172a;
-    --gold: #c5a059;
-    --gold-light: #e2b87a;
-    --gold-dark: #8b6f3c;
-    --text-silver: #cbd5e1;
-    --text-light: #f1f5f9;
-    --text-muted: #94a3b8;
+    --bg-card: #141920;
+    --gold: #8b9bb3;
+    --gold-light: #b5c4d8;
+    --gold-dark: #5a6b81;
+    --text-silver: #d4dce8;
+    --text-light: #f0f4f8;
+    --text-muted: #8b9bb3;
     --cyan-glacial: #00e5ff;
     --cyan-dark: #0099b8;
     --warn-red: #ef4444;
     --warn-orange: #f59e0b;
     --font-main: 'Inter', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
-    --border-color: #334155;
-    --glass-border: rgba(255, 255, 255, 0.05);
+    --border-color: #2a3544;
+    --glass-border: rgba(139, 155, 179, 0.1);
     --shadow-gold: 0 0 20px rgba(197, 160, 89, 0.3);
 }
 
