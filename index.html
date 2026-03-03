@@ -1,27 +1,26 @@
 <!DOCTYPE html>
-<html lang="pt-PT" id="htmlRoot">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">UNIFED – PROBATUM | Unidade Independente de Inteligência Forense Económica e Digital · v13.1.7-GOLD</title>
+    <title>IFDE - PROBATUM | Inteligência Forense Digital & Económica · v13.1.0-ELITE-GOLD · DORA COMPLIANT · COURT READY</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+
+    <!-- Efeito Laser (Cyan Glacial - Laboratório Criminal) -->
     <div class="laser-h"></div>
     <div class="laser-v"></div>
 
     <nav class="nav-bar">
-        <div class="logo">
-            UNIFED <span class="gold">PROBATUM</span> 
-            <span class="version-badge">v13.1.7-GOLD · DORA COMPLIANT</span>
-        </div>
+        <div class="logo">IFDE <span class="gold">PROBATUM</span> <span class="version-badge">UNIFED – PROBATUM · v13.1.0-ELITE-GOLD · DORA COMPLIANT</span></div>
         <div class="nav-links">
-            <a href="#audit"><i class="fas fa-search"></i> <span id="navAudit">Auditoria</span></a>
-            <a href="#blockchain"><i class="fas fa-link"></i> <span id="navBlockchain">Blockchain</span></a>
-            <a href="#system"><i class="fas fa-microchip"></i> <span id="navSystem">Sistema</span></a>
-            <a href="#contact" class="nav-cta"><span id="navConsulting">Consultoria</span></a>
+            <a href="#audit"><i class="fas fa-search"></i> Auditoria Algorítmica</a>
+            <a href="#blockchain"><i class="fas fa-link"></i> Blockchain Forense</a>
+            <a href="#ifde"><i class="fas fa-microchip"></i> Sistema UNIFED – PROBATUM</a>
+            <a href="#contact" class="nav-cta">Consultoria</a>
             <button class="lang-toggle" id="langToggle" onclick="switchLanguage()">
                 <span class="lang-option active" data-lang="pt">PT</span>
                 <span class="lang-divider">|</span>
@@ -32,47 +31,59 @@
 
     <header class="hero">
         <canvas id="trackingCanvas"></canvas>
+        
+        <!-- Terminal Lateral Dinâmico (Logs Forenses) -->
         <div class="forensic-terminal">
             <div class="terminal-header">
-                <span class="terminal-title">UNIFED_FORENSIC_ENGINE</span>
+                <span class="terminal-title">IFDE_FORENSIC_ENGINE</span>
                 <span class="terminal-status">ACTIVE</span>
             </div>
-            <div class="terminal-body">
-                <div class="terminal-line">[INIT] v13.1.7-GOLD · DORA COMPLIANT · SHA-256</div>
-                <div class="terminal-line" id="terminalLoad">[LOAD] Módulo de triangulação financeira</div>
+            <div class="terminal-body" id="terminalBody">
+                <div class="terminal-line">[INIT] v13.1.0-ELITE-GOLD · DORA COMPLIANT · COURT READY · SHA-256 · RFC 3161</div>
+                <div class="terminal-line">[LOAD] Módulo de triangulação financeira</div>
+                <div class="terminal-line" id="terminalDynamic"></div>
             </div>
         </div>
 
         <div class="hero-content">
             <div class="forensic-badge">
                 <i class="fas fa-fingerprint"></i>
-                <span id="heroProof">PROVA DIGITAL MATERIAL · SMOKING GUN</span>
+                <span>PROVA DIGITAL MATERIAL · SMOKING GUN</span>
             </div>
-            <h1 class="reveal-text" id="heroTitle">A Verdade Material Através do Dado.</h1>
-            <p class="hero-subtitle" id="heroSubtitle">Especialização em Peritagem Forense e Inteligência Económico-Financeira para o Setor Jurídico de Elite.</p>
+
+            <!-- Badges de Autoridade -->
+            <div class="authority-badges">
+                <span class="badge-dora" title="Digital Operational Resilience Act"><i class="fas fa-shield-alt"></i> DORA COMPLIANT</span>
+                <span class="badge-rgpd" title="Regulamento Geral sobre a Proteção de Dados"><i class="fas fa-user-shield"></i> RGPD Art. 30.º</span>
+                <span class="badge-rfc" title="RFC 3161 Time-Stamp Protocol"><i class="fas fa-clock"></i> RFC 3161 TIMESTAMP</span>
+            </div>
+            <h1 class="reveal-text" id="heroTitle">A Verdade Material Através do Facto.</h1>
+            <p class="hero-subtitle">Especialização em Peritagem Forense e Inteligência Económico-Financeira para o Setor Jurídico de Elite.</p>
             
-            <div class="evidence-dropzone">
+            <!-- Dropzone Simulado (Demonstração de Cadeia de Custódia) -->
+            <div class="evidence-dropzone" id="evidenceDropzone">
                 <i class="fas fa-cloud-upload-alt"></i>
-                <span id="dropzoneText">Arraste ficheiro para simular cadeia de custódia</span>
+                <span>Arraste um ficheiro para simular cadeia de custódia</span>
+                <div class="hash-simulation" id="hashSimulation"></div>
             </div>
 
             <div class="hero-stats">
                 <div class="stat-item">
                     <span class="stat-value">+4.200</span>
-                    <span class="stat-label" id="statEvidence">Evidências Processadas</span>
+                    <span class="stat-label">Evidências Processadas</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-value">€438M</span>
-                    <span class="stat-label" id="statValue">Valor em Análise</span>
+                    <span class="stat-label">Valor em Análise</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-value">SHA-256</span>
-                    <span class="stat-label" id="statCustody">Cadeia de Custódia</span>
+                    <span class="stat-label">Cadeia de Custódia</span>
                 </div>
             </div>
         </div>
         <div class="scroll-indicator">
-            <span id="scrollText">DISCREPÂNCIA DETETADA</span>
+            <span>DISCREPÂNCIA DETETADA · ROLAR PARA ANÁLISE</span>
             <i class="fas fa-chevron-down"></i>
         </div>
     </header>
@@ -80,58 +91,297 @@
     <section id="audit" class="section-dark">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">01</span>
-                <h2 class="gold"><span id="sec1Title">Auditoria Fiscal & Compliance</span></h2>
+                <span class="section-tag">01 · ANÁLISE ALGORÍTMICA</span>
+                <h2 class="gold">Auditoria <span class="text-white">Fiscal & Compliance</span></h2>
             </div>
             <div class="content-grid">
                 <div class="text-block">
-                    <p id="sec1Text">Processamento de estruturas SAF-T e conformidade DAC7 com precisão pericial. Identificação de anomalias fiscais através do motor forense UNIFED – PROBATUM v13.1.7-GOLD.</p>
+                    <p>Processamento de estruturas <strong>SAF-T</strong> e conformidade <strong>DAC7</strong> com precisão de nível pericial. Identificação de anomalias fiscais e reconstrução de fluxos financeiros complexos através do motor forense UNIFED – PROBATUM v13.1.0-ELITE-GOLD.</p>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle gold"></i>
+                            <span>Extração dinâmica de dados (Fleet Extract)</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle gold"></i>
+                            <span><span class="term" data-tooltip="Bank Transactions Over Reality - Base operacional real vs faturada">BTOR</span> vs <span class="term" data-tooltip="Base Tributável Faturada - Valor declarado em fatura">BTF</span>: Dupla discrepância</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle gold"></i>
+                            <span>Diferenciação IVA 6% (transporte) / 23% (intermediação)</span>
+                        </div>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Decreto-Lei n.º 28/2019</span>
+                        <span class="tech-tag">ISO/IEC 27037</span>
+                        <span class="tech-tag">RGIT Art. 103/104</span>
+                    </div>
+                </div>
+                <div class="code-preview">
+                    <div class="code-header">
+                        <span>DISCREPANCY_ANALYSIS.log</span>
+                        <span class="code-dot"></span>
+                    </div>
+                    <pre class="code-block">
+[INFO] SAF-T Bruto: 333.739,00 €
+[INFO] Ganhos: 404.925,00 €
+[INFO] Comissões Extrato: 93.812,00 €
+[INFO] Faturas: 36.154,00 €
+[WARN] Discrepância Crítica (BTOR vs BTF): 57.658,00 € (61.46%)
+[WARN] IVA em falta (23%): 13.261,34 €
+[WARN] IVA em falta (6%): 3.459,48 €
+[SUCCESS] Smoking Gun DETETADA</pre>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="blockchain" class="section-gold-border">
-        <div class="container">
+        <div class="container reverse">
             <div class="section-header">
-                <span class="section-tag">02</span>
-                <h2 class="gold"><span id="sec2Title">Blockchain Deep Trace</span></h2>
+                <span class="section-tag">02 · INVESTIGAÇÃO CRIPTO-FORENSE</span>
+                <h2 class="gold">Blockchain <span class="text-white">Deep Trace</span></h2>
             </div>
             <div class="content-grid">
+                <div class="code-preview">
+                    <div class="code-header">
+                        <span>LEDGER_TRACE.hash</span>
+                        <span class="code-dot"></span>
+                    </div>
+                    <pre class="code-block small">
+0x8E239C061A5C6E834927183D29A0C4F3
+0x423A5D6210F9213456789ABCDEF0123
+│
+├─ Transação: 0x8E23... (ETH)
+├─ Timestamp: 2026-02-22 14:23:17 UTC
+├─ Mixer Detected: Tornado Cash
+└─ Wallet Cluster: 3 endereços relacionados</pre>
+                </div>
                 <div class="text-block">
-                    <p id="sec2Text">Rastreio de ativos em ambientes descentralizados com validação SHA-256 e cadeia de custódia forense.</p>
+                    <p>Rastreio de ativos em ambientes descentralizados. Inteligência aplicada à recuperação de ativos e desarticulação de esquemas de branqueamento de capitais em <strong>Blockchain</strong> com validação <span class="term" data-tooltip="Secure Hash Algorithm 256-bit - Padrão criptográfico para integridade de dados">SHA-256</span> e cadeia de custódia forense.</p>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle gold"></i>
+                            <span>Rastreio跨-chain (BTC, ETH, BSC, SOL)</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle gold"></i>
+                            <span>Deteção de mixers e privacy coins</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle gold"></i>
+                            <span>Relatório pericial com selo temporal RFC 3161</span>
+                        </div>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Ledger Deep-Trace</span>
+                        <span class="tech-tag">Chain Analytics</span>
+                        <span class="tech-tag">SHA-256</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="section-cta">
+    <!-- SECÇÃO: SISTEMA UNIFED – PROBATUM -->
+    <section id="ifde" class="section-dark">
         <div class="container">
-            <h2 id="ctaTitle">Detém a <span class="gold">Smoking Gun</span>?</h2>
-            <p id="ctaText">Consultoria estratégica para Sociedades de Advogados.</p>
-            <a href="#" class="cta-button">
-                <i class="fas fa-handcuffs"></i>
-                <span id="ctaButton">APRESENTAR PROVA</span>
-            </a>
+            <div class="section-header">
+                <span class="section-tag">03 · MOTOR FORENSE</span>
+                <h2 class="gold">Sistema <span class="text-white">UNIFED – PROBATUM v13.1.0-ELITE-GOLD</span></h2>
+            </div>
+            
+            <div class="vdc-showcase">
+                <div class="quantum-card">
+                    <div class="quantum-header">
+                        <i class="fas fa-balance-scale"></i>
+                        <h3>ANÁLISE DE DISCREPÂNCIA · PROVA MATERIAL</h3>
+                    </div>
+                    <div class="quantum-value">57.658,00 €</div>
+                    <div class="quantum-detail">
+                        <span>Discrepância <span class="term" data-tooltip="Base Tributável Operacional Real (extratos)">BTOR</span> vs <span class="term" data-tooltip="Base Tributável Faturada (faturas)">BTF</span></span>
+                        <span class="percent-badge">61,46%</span>
+                    </div>
+                    <div class="quantum-breakdown">
+                        <div class="breakdown-row">
+                            <span>BTOR (Base Operacional):</span>
+                            <span>93.812,00 €</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span>BTF (Base Faturada):</span>
+                            <span>36.154,00 €</span>
+                        </div>
+                        <div class="breakdown-row highlight">
+                            <span>IVA 23% em Análise:</span>
+                            <span>13.261,34 €</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span>IVA 6% em Análise:</span>
+                            <span>3.459,48 €</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vdc-features">
+                    <div class="vdc-feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <div>
+                            <h4>Cadeia de Custódia <span class="term" data-tooltip="SHA-256 - Função hash criptográfica de 256 bits">SHA-256</span></h4>
+                            <p>Hashes completos de todas as evidências processadas</p>
+                        </div>
+                    </div>
+                    <div class="vdc-feature">
+                        <i class="fas fa-qrcode"></i>
+                        <div>
+                            <h4>QR Code de Validação</h4>
+                            <p>Verificação de integridade do relatório pericial</p>
+                        </div>
+                    </div>
+                    <div class="vdc-feature">
+                        <i class="fas fa-balance-scale"></i>
+                        <div>
+                            <h4>Conformidade Legal · <span class="term" data-tooltip="Digital Operational Resilience Act (EU 2022/2554) — Regulamento europeu de resiliência operacional digital">DORA</span></h4>
+                            <p>ISO/IEC 27037 · DL 28/2019 · RGIT · UE 2022/2554</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hash-chain">
+                <div class="hash-item">
+                    <span class="hash-label">Master Hash:</span>
+                    <span class="hash-value glitch-hover" id="masterHash" data-hash="d10c29fc8cd9a1f73483718b3b86545caed23e373d8a69482e60610cab2501d7" title="Master Hash SHA-256 · RFC 3161 · DORA COMPLIANT">d10c29fc8cd9a1f73483718b3b86545caed23e373d8a69482e60610cab2501d7</span>
+                </div>
+                <div class="hash-item">
+                    <span class="hash-label">QR Code:</span>
+                    <div id="qrcode-demo" class="qr-demo"></div>
+                </div>
+            </div>
+
+            <!-- BOTÃO DE ACESSO AO RELATÓRIO FORENSE -->
+            <div class="report-trigger-container">
+                <button class="btn-gold" onclick="openForensicReport()">
+                    <i class="fas fa-file-invoice"></i> VISUALIZAR MODELO DE RELATÓRIO UNIFED – PROBATUM
+                </button>
+                <p class="small-note">* Documento exemplificativo com valor probatório material</p>
+            </div>
         </div>
     </section>
 
+    <!-- SECÇÃO DE ESTATÍSTICAS FORENSES -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card forensic">
+                    <i class="fas fa-file-invoice"></i>
+                    <div class="stat-number">11.432</div>
+                    <div class="stat-desc">Faturas Analisadas</div>
+                </div>
+                <div class="stat-card forensic">
+                    <i class="fas fa-file-code"></i>
+                    <div class="stat-number">3.287</div>
+                    <div class="stat-desc">Ficheiros SAF-T</div>
+                </div>
+                <div class="stat-card forensic">
+                    <i class="fas fa-link"></i>
+                    <div class="stat-number">1.2M</div>
+                    <div class="stat-desc">Transações Rastreadas</div>
+                </div>
+                <div class="stat-card forensic">
+                    <i class="fas fa-gavel"></i>
+                    <div class="stat-number">47</div>
+                    <div class="stat-desc">Processos Judiciais Suportados</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALL TO ACTION (CONSULTORIA) -->
+    <section id="contact" class="section-cta">
+        <div class="container">
+            <h2>Detém a <span class="gold">Smoking Gun</span>?</h2>
+            <p>Nós temos os dados que ganham a causa. Consultoria estratégica para Sociedades de Advogados.</p>
+            <a href="#" class="cta-button">
+                <i class="fas fa-handcuffs"></i>
+                APRESENTAR PROVA
+            </a>
+            <p class="small-note">Análise preliminar confidencial · Decreto-Lei n.º 28/2019</p>
+        </div>
+    </section>
+
+    <!-- FOOTER PRINCIPAL -->
     <footer class="main-footer">
         <div class="footer-grid">
             <div class="footer-info">
-                <div class="logo">UNIFED <span class="gold">PROBATUM</span></div>
-                <p id="footerTagline">Unidade Independente de Inteligência Forense Económica e Digital</p>
+                <div class="logo">IFDE <span class="gold term" data-tooltip="Probatum — Latim: 'provado'. Certificação de prova digital com validade forense e judicial">PROBATUM</span></div>
+                <p>Inteligência Forense Digital & Económica</p>
+            </div>
+            <div class="footer-links">
+                <a href="javascript:void(0)" onclick="openProtocol('privacidade')">Privacidade</a>
+                <a href="javascript:void(0)" onclick="openProtocol('termos')">Termos Legais</a>
+                <a href="javascript:void(0)" onclick="openProtocol('rgpd')">RGPD</a>
+                <a href="javascript:void(0)" onclick="openProtocol('certificacoes')">Certificações</a>
             </div>
         </div>
         
+        <!-- Master Hash Box -->
+        <div class="master-hash-box">
+            <p class="mono-label"><i class="fas fa-lock"></i> VALIDAÇÃO DE INTEGRIDADE DO SISTEMA · MASTER HASH SHA-256</p>
+            <div class="hash-container">
+                <p id="master-hash" class="mono-code glitch-hover">d10c29fc8cd9a1f73483718b3b86545caed23e373d8a69482e60610cab2501d7</p>
+                <button id="copyHashBtn" class="copy-btn" title="Copiar Hash SHA-256">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </div>
+            <p class="hash-timestamp">Timestamp RFC 3161: 2026-02-22T14:23:17Z</p>
+        </div>
+
         <div class="footer-legal">
-            <p>© 2024/2026 UNIFED – PROBATUM</p>
-            <p class="vdc-credit"><strong id="footerValidation">VALIDAÇÃO TÉCNICA INDEPENDENTE</strong> | <strong id="footerAnalyst">Analista e Consultor Forense Independente</strong></p>
-            <p class="vdc-credit"><strong>v13.1.7-GOLD · DORA COMPLIANT · Art. 30.º RGPD READY</strong></p>
+            <p>© 2024/2026 UNIFED – PROBATUM | EM · Consultoria de Gestão e Auditoria Forense. Todos os direitos reservados.</p>
+            <p class="vdc-credit"><strong>VALIDAÇÃO TÉCNICA INDEPENDENTE</strong> | <strong>Analista e Consultor Forense Independente</strong></p>
+            <p class="vdc-credit"><strong>UNIFED – PROBATUM · v13.1.7-GOLD · DORA COMPLIANT</strong> · Court Ready · SHA-256 · RFC 3161 · <strong>Art. 30.º RGPD READY</strong></p>
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- MODAL DE PROTOCOLOS DE CONFORMIDADE -->
+    <div id="protocolModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-shield-halved"></i>
+                    <span id="modalTitle">PROTOCOLO DE SEGURANÇA</span>
+                </div>
+                <span class="close-modal" onclick="closeProtocol()">&times;</span>
+            </div>
+            <div id="protocolText" class="protocol-body">
+                <!-- Conteúdo carregado dinamicamente via JavaScript -->
+            </div>
+            <div class="modal-footer">
+                <span>STATUS: SECURE ACCESS · AMBIENTE CONTROLADO</span>
+                <span>VERIFIED BY UNIFED-PROBATUM · SHA-256</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- VISUALIZADOR DE RELATÓRIO FORENSE IMUTÁVEL -->
+    <div id="reportOverlay" class="report-overlay">
+        <div class="report-actions">
+            <span class="report-status"><i class="fas fa-eye"></i> MODO DE VISUALIZAÇÃO PROTEGIDA · DOCUMENTO NÃO DESCARREGÁVEL</span>
+            <button class="btn-close-report" onclick="closeForensicReport()">
+                <i class="fas fa-times"></i> FECHAR
+            </button>
+        </div>
+        
+        <div class="report-page" id="reportContent">
+            <!-- Conteúdo carregado dinamicamente via JavaScript -->
+        </div>
+    </div>
+
+    <!-- Toast Container (para feedback) -->
+    <div id="toastContainer"></div>
+
+    <!-- D1: QRCode.js – Dynamic Hash-to-QR Mapping – v13.1.0-ELITE-GOLD · DORA COMPLIANT -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSi2jULHGHRXBNkfO9o/RkjHuX0OB3MFKS5w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="script.js"></script>
 </body>
 </html>
